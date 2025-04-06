@@ -2,7 +2,6 @@ extends Area2D
 #add timer after playing destroyed to add the poerup scene
 
 class_name CentralExplosion
-#@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 var size=1
 
 @onready var raycasts: Array[RayCast2D]=[
@@ -24,16 +23,39 @@ var x
 var y
 var scale_x
 var scale_y
-
-
+var scale_x_after_power_up=4.0
+var scale_y_after_power_up=4.0
 func _ready():
-
+		var bomb_up_applied
+		var power_up=get_node("/root/PowerUp")
+		if power_up:
+			print("power_up here")
+			bomb_up_applied=apply_bomb_up()
+			if bomb_up_applied==true:
+				raycasts[0].target_position=Vector2(0,-128)
+				raycasts[1].target_position=Vector2(128,0)
+				raycasts[2].target_position=Vector2(0,128)
+				raycasts[3].target_position=Vector2(-128,0)
+				print("Bomb Up Applied")
+				print("Up Tsrget:",raycasts[0].target_position)
+		if power_up==null:
+			print("power_up not here")
+		
 		#var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 		for i in range(4):
+			
 			var explosion_instance = DIRECTIONAL_EXPLOSION.instantiate()
 			raycasts[i].global_position=global_position
 			raycasts[i].force_raycast_update()
+			if bomb_up_applied==true:
+				print("Bomb Up Applied")
+				raycasts[0].target_position=Vector2(0,-128)
+				raycasts[1].target_position=Vector2(128,0)
+				raycasts[2].target_position=Vector2(0,128)
+				raycasts[3].target_position=Vector2(-128,0)
+			print("tsrget pos:",raycasts[i].target_position)
 			
+
 			if raycasts[i].is_colliding():
 				
 				var collision_point=raycasts[i].get_collision_point()
@@ -91,7 +113,9 @@ func _ready():
 					explosion_instance.animated_sprite_2d.animation_finished.connect(func():
 						
 						explosion_instance.queue_free()
-						queue_free()
+						$AnimatedSprite2D.queue_free()
+						$CollisionShape2D.queue_free()
+						$AnimatedSprite2D
 					)
 					
 					print(animation_names[i])
@@ -105,23 +129,23 @@ func _ready():
 					x=raycasts[i].position.x
 					y=raycasts[i].position.y-40
 					scale_x=1.0
-					scale_y=4.0
+					scale_y=scale_y_after_power_up
 					
 				elif(raycasts[i]==raycasts[1]):
 					x=raycasts[i].position.x+40
 					y=raycasts[i].position.y
-					scale_x=4.0
+					scale_x=scale_x_after_power_up
 					scale_y=1.0
 					
 				elif(raycasts[i]==raycasts[2]):
 					x=raycasts[i].position.x
 					y=raycasts[i].position.y+40
 					scale_x=1.0
-					scale_y=4.0
+					scale_y=scale_x_after_power_up
 				elif(raycasts[i]==raycasts[3]):
 					x=raycasts[i].position.x-40
 					y=raycasts[i].position.y
-					scale_x=4.0
+					scale_x=scale_x_after_power_up
 					scale_y=1.0
 					
 						
@@ -130,7 +154,6 @@ func _ready():
 				explosion_instance.position=Vector2(x,y)
 				print("explosion pos:",explosion_instance.position)
 				
-
 
 				explosion_instance.scale=Vector2(scale_x,scale_y)
 				print("else scale:",explosion_instance.scale)
@@ -142,10 +165,25 @@ func _ready():
 				explosion_instance.animated_sprite_2d.animation_finished.connect(func():
 					
 					explosion_instance.queue_free()
-					queue_free()
+					$AnimatedSprite2D.queue_free()
+					$CollisionShape2D.queue_free()
 				)
 				
 				print(animation_names[i])
 				
 		
+func apply_bomb_up() ->bool:
+	var bomb_up_applied
+	var power_up=get_node("/root/PowerUp")
+	if power_up.index==0:
+		scale_x_after_power_up=8
+		scale_y_after_power_up=8
+		bomb_up_applied=true
+		print("Bomb up func called")
+	else:
+		bomb_up_applied=false
+	return bomb_up_applied
+		#
+
 		
+			

@@ -7,7 +7,7 @@ const POWER_UP = preload("res://scenes/power_up.tscn")
 	
 func set_power_up(brick_position:Vector2):
 		 
-		#var central_exp=get_node_or_null("/root/CentralExplosion")
+		
 		#while central_exp == null:
 			#await get_tree().process_frame
 			#central_exp=get_node_or_null("/root/CentralExplosion")	
@@ -25,5 +25,3 @@ func set_power_up(brick_position:Vector2):
 			
 			get_parent().add_child(powerup)
 		
-
-	

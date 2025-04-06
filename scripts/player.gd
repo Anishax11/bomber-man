@@ -21,7 +21,6 @@ func _process(delta: float) ->void:
 	
 func _input(event : InputEvent) ->void:
 	if(is_dead==true):
-		print("player dead") 
 		return
 	if Input.is_action_pressed("right"):
 		movement=Vector2.RIGHT
