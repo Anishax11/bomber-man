@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://cjd6pny1ajvdy"]
+
+[ext_resource type="Script" path="res://scripts/central_explosion.gd" id="1_gugns"]
+[ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="2_ykxnn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c628g"]
+atlas = ExtResource("2_ykxnn")
+region = Rect2(32, 98, 16, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djlrl"]
+atlas = ExtResource("2_ykxnn")
+region = Rect2(112, 98, 16, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dvthp"]
+atlas = ExtResource("2_ykxnn")
+region = Rect2(32, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hrp3u"]
+atlas = ExtResource("2_ykxnn")
+region = Rect2(112, 176, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8yopg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c628g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djlrl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dvthp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hrp3u")
+}],
+"loop": false,
+"name": &"default",
+"speed": 16.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s0w58"]
+radius = 8.0
+
+[node name="CentralExplosion" type="Area2D"]
+collision_layer = 16
+collision_mask = 37
+script = ExtResource("1_gugns")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8yopg")
+frame = 3
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_s0w58")
+
+[node name="Raycasts" type="Node" parent="."]
+
+[node name="RayCast2DUp" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(0, -64)
+collision_mask = 6
+collide_with_areas = true
+
+[node name="RayCast2DRight" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(64, 0)
+collision_mask = 6
+collide_with_areas = true
+
+[node name="RayCast2DDown" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(0, 64)
+collision_mask = 6
+collide_with_areas = true
+
+[node name="RayCast2DLeft" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(-64, 0)
+collision_mask = 6
+collide_with_areas = true

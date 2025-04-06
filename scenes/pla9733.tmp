@@ -1,0 +1,182 @@
+[gd_scene load_steps=18 format=3 uid="uid://xgc6vwgkltk1"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_58jkt"]
+[ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="1_fqqfr"]
+[ext_resource type="Script" path="res://scripts/raycasts.gd" id="3_0x1tm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_miwqf"]
+atlas = ExtResource("1_fqqfr")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtmtd"]
+atlas = ExtResource("1_fqqfr")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t418t"]
+atlas = ExtResource("1_fqqfr")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_po1u7"]
+atlas = ExtResource("1_fqqfr")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jasg"]
+atlas = ExtResource("1_fqqfr")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0bcc"]
+atlas = ExtResource("1_fqqfr")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mhaa"]
+atlas = ExtResource("1_fqqfr")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gu0j3"]
+atlas = ExtResource("1_fqqfr")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8bkm"]
+atlas = ExtResource("1_fqqfr")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r61lw"]
+atlas = ExtResource("1_fqqfr")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2qf2"]
+atlas = ExtResource("1_fqqfr")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3b85"]
+atlas = ExtResource("1_fqqfr")
+region = Rect2(80, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3dax7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_miwqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtmtd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t418t")
+}],
+"loop": false,
+"name": &"walk down",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_po1u7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3jasg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0bcc")
+}],
+"loop": true,
+"name": &"walk left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6mhaa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gu0j3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8bkm")
+}],
+"loop": true,
+"name": &"walk right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r61lw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2qf2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3b85")
+}],
+"loop": true,
+"name": &"walk up",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_40dah"]
+radius = 5.0
+height = 16.0
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_58jkt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_3dax7")
+animation = &"walk down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_40dah")
+
+[node name="Raycasts" type="Node2D" parent="."]
+script = ExtResource("3_0x1tm")
+
+[node name="Horizontal" type="Node2D" parent="Raycasts"]
+
+[node name="left" type="Node2D" parent="Raycasts/Horizontal"]
+
+[node name="tophorizontalleft" type="RayCast2D" parent="Raycasts/Horizontal/left"]
+position = Vector2(-2, -6)
+target_position = Vector2(-2, 0)
+collision_mask = 14
+
+[node name="bottomhorizontalleft" type="RayCast2D" parent="Raycasts/Horizontal/left"]
+position = Vector2(-2, 6)
+target_position = Vector2(-2, 0)
+collision_mask = 14
+
+[node name="right" type="Node2D" parent="Raycasts/Horizontal"]
+
+[node name="tophorizontalright" type="RayCast2D" parent="Raycasts/Horizontal/right"]
+position = Vector2(2, -6)
+target_position = Vector2(2, 0)
+collision_mask = 14
+
+[node name="bottomhorizontalright" type="RayCast2D" parent="Raycasts/Horizontal/right"]
+position = Vector2(2, 6)
+target_position = Vector2(2, 0)
+collision_mask = 14
+
+[node name="Vertical" type="Node2D" parent="Raycasts"]
+
+[node name="top" type="Node2D" parent="Raycasts/Vertical"]
+
+[node name="topverticalright" type="RayCast2D" parent="Raycasts/Vertical/top"]
+position = Vector2(3, -6)
+target_position = Vector2(0, -2)
+collision_mask = 14
+
+[node name="topverticalleft" type="RayCast2D" parent="Raycasts/Vertical/top"]
+position = Vector2(-3, -6)
+target_position = Vector2(0, -2)
+collision_mask = 14
+
+[node name="bottom" type="Node2D" parent="Raycasts/Vertical"]
+
+[node name="bottomverticalleft" type="RayCast2D" parent="Raycasts/Vertical/bottom"]
+position = Vector2(-2, 6)
+target_position = Vector2(0, 2)
+collision_mask = 14
+
+[node name="bottomverticalright" type="RayCast2D" parent="Raycasts/Vertical/bottom"]
+position = Vector2(2, 6)
+target_position = Vector2(0, 2)
+collision_mask = 14
