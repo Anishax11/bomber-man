@@ -1,5 +1,5 @@
 extends Area2D
-#add timer after playing destroyed to add the poerup scene
+#powerup only applies when explosion of another bomb enters the powerup tile
 
 class_name CentralExplosion
 var size=1
@@ -27,8 +27,8 @@ var scale_x_after_power_up=4.0
 var scale_y_after_power_up=4.0
 func _ready():
 		var bomb_up_applied
-		var power_up=get_node("/root/PowerUp")
-		if power_up:
+		var power_up=get_node("/root/game/PowerUp")
+		if power_up!=null:
 			print("power_up here")
 			bomb_up_applied=apply_bomb_up()
 			if bomb_up_applied==true:
@@ -48,11 +48,11 @@ func _ready():
 			raycasts[i].global_position=global_position
 			raycasts[i].force_raycast_update()
 			if bomb_up_applied==true:
-				print("Bomb Up Applied")
-				raycasts[0].target_position=Vector2(0,-128)
-				raycasts[1].target_position=Vector2(128,0)
-				raycasts[2].target_position=Vector2(0,128)
-				raycasts[3].target_position=Vector2(-128,0)
+					print("Bomb Up Applied")
+					raycasts[0].target_position=Vector2(0,-128)
+					raycasts[1].target_position=Vector2(128,0)
+					raycasts[2].target_position=Vector2(0,128)
+					raycasts[3].target_position=Vector2(-128,0)
 			print("tsrget pos:",raycasts[i].target_position)
 			
 
@@ -115,12 +115,11 @@ func _ready():
 						explosion_instance.queue_free()
 						$AnimatedSprite2D.queue_free()
 						$CollisionShape2D.queue_free()
-						$AnimatedSprite2D
+						
 					)
 					
 					print(animation_names[i])
 					
-					#explosion_instance.play_animation(animation_names[i])
 					  
 					 
 					
@@ -174,7 +173,7 @@ func _ready():
 		
 func apply_bomb_up() ->bool:
 	var bomb_up_applied
-	var power_up=get_node("/root/PowerUp")
+	var power_up=get_node("/root/game/PowerUp")
 	if power_up.index==0:
 		scale_x_after_power_up=8
 		scale_y_after_power_up=8

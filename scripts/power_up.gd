@@ -14,7 +14,7 @@ class_name PowerUp
 var index
 
 func _ready() -> void:
-	
+	print("path:",self.get_path())
 	index=0#randi_range(0,3)
 	
 	print("POWER UP CALLED!",index)
@@ -39,5 +39,6 @@ func _on_area_entered(area: Area2D) -> void:
 			print("Wall Pass!")
 		elif(index==3):
 			print("Fire Up!")
-		queue_free()
+		$CollisionShape2D.queue_free()
+		$AnimatedSprite2D.queue_free()
 	
