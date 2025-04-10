@@ -1,5 +1,4 @@
 extends Area2D
-#powerup only applies when explosion of another bomb enters the powerup tile
 
 class_name CentralExplosion
 var size=1
@@ -31,13 +30,7 @@ func _ready():
 		if power_up!=null:
 			print("power_up here")
 			bomb_up_applied=apply_bomb_up()
-			if bomb_up_applied==true:
-				raycasts[0].target_position=Vector2(0,-128)
-				raycasts[1].target_position=Vector2(128,0)
-				raycasts[2].target_position=Vector2(0,128)
-				raycasts[3].target_position=Vector2(-128,0)
-				print("Bomb Up Applied")
-				print("Up Tsrget:",raycasts[0].target_position)
+			
 		if power_up==null:
 			print("power_up not here")
 		
@@ -47,13 +40,7 @@ func _ready():
 			var explosion_instance = DIRECTIONAL_EXPLOSION.instantiate()
 			raycasts[i].global_position=global_position
 			raycasts[i].force_raycast_update()
-			if bomb_up_applied==true:
-					print("Bomb Up Applied")
-					raycasts[0].target_position=Vector2(0,-128)
-					raycasts[1].target_position=Vector2(128,0)
-					raycasts[2].target_position=Vector2(0,128)
-					raycasts[3].target_position=Vector2(-128,0)
-			print("tsrget pos:",raycasts[i].target_position)
+			
 			
 
 			if raycasts[i].is_colliding():
@@ -124,28 +111,53 @@ func _ready():
 					 
 					
 			else:
-				if(raycasts[i]==raycasts[0]):
-					x=raycasts[i].position.x
-					y=raycasts[i].position.y-40
-					scale_x=1.0
-					scale_y=scale_y_after_power_up
+				if(bomb_up_applied==true):
+					if(raycasts[i]==raycasts[0]):
+						x=raycasts[i].position.x
+						y=raycasts[i].position.y-72
+						scale_x=1.0
+						scale_y=scale_y_after_power_up
 					
-				elif(raycasts[i]==raycasts[1]):
-					x=raycasts[i].position.x+40
-					y=raycasts[i].position.y
-					scale_x=scale_x_after_power_up
-					scale_y=1.0
+					elif(raycasts[i]==raycasts[1]):
+						x=raycasts[i].position.x+72
+						y=raycasts[i].position.y
+						scale_x=scale_x_after_power_up
+						scale_y=1.0
+						
+					elif(raycasts[i]==raycasts[2]):
+						x=raycasts[i].position.x
+						y=raycasts[i].position.y+72
+						scale_x=1.0
+						scale_y=scale_x_after_power_up
+					elif(raycasts[i]==raycasts[3]):
+						x=raycasts[i].position.x-72
+						y=raycasts[i].position.y
+						scale_x=scale_x_after_power_up
+						scale_y=1.0
+				else:
+							
+					if(raycasts[i]==raycasts[0]):
+						x=raycasts[i].position.x
+						y=raycasts[i].position.y-40
+						scale_x=1.0
+						scale_y=scale_y_after_power_up
+						
+					elif(raycasts[i]==raycasts[1]):
+						x=raycasts[i].position.x+40
+						y=raycasts[i].position.y
+						scale_x=scale_x_after_power_up
+						scale_y=1.0
 					
-				elif(raycasts[i]==raycasts[2]):
-					x=raycasts[i].position.x
-					y=raycasts[i].position.y+40
-					scale_x=1.0
-					scale_y=scale_x_after_power_up
-				elif(raycasts[i]==raycasts[3]):
-					x=raycasts[i].position.x-40
-					y=raycasts[i].position.y
-					scale_x=scale_x_after_power_up
-					scale_y=1.0
+					elif(raycasts[i]==raycasts[2]):
+						x=raycasts[i].position.x
+						y=raycasts[i].position.y+40
+						scale_x=1.0
+						scale_y=scale_x_after_power_up
+					elif(raycasts[i]==raycasts[3]):
+						x=raycasts[i].position.x-40
+						y=raycasts[i].position.y
+						scale_x=scale_x_after_power_up
+						scale_y=1.0
 					
 						
 						
@@ -177,6 +189,11 @@ func apply_bomb_up() ->bool:
 	if power_up.index==0:
 		scale_x_after_power_up=8
 		scale_y_after_power_up=8
+		raycasts[0].target_position=Vector2(0,-128)
+		raycasts[1].target_position=Vector2(128,0)
+		raycasts[2].target_position=Vector2(0,128)
+		raycasts[3].target_position=Vector2(-128,0)
+		print("Bomb Up Applied")
 		bomb_up_applied=true
 		print("Bomb up func called")
 	else:
