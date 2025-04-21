@@ -24,15 +24,15 @@ var scale_x
 var scale_y
 var scale_x_after_power_up=4.0
 var scale_y_after_power_up=4.0
-var timeout
+
 func _ready():
 		var bomb_up_applied
 		
 		var power_up=get_node("/root/game/PowerUp")
 		
-		if power_up!=null and timeout!=true:
+		if power_up!=null and power_up.timeout!=true:
 			print("power_up here")
-			print("Timeout:",timeout)
+			print("Timeout:",power_up.timeout)
 			bomb_up_applied=apply_bomb_up()
 			
 		if power_up==null:
@@ -220,7 +220,7 @@ func apply_bomb_up() ->bool:
 	#print("Timeout")
 
 func deactivate_power_up() -> void:
-	timeout=true
+	
 	scale_x_after_power_up=4
 	scale_y_after_power_up=4
 	raycasts[0].target_position=Vector2(0,-64)
@@ -228,4 +228,6 @@ func deactivate_power_up() -> void:
 	raycasts[2].target_position=Vector2(0,64)
 	raycasts[3].target_position=Vector2(-64,0)
 	print("applied deactivate")
+	
+
 	

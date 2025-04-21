@@ -2,7 +2,7 @@ extends Area2D
 
 class_name PowerUp
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-
+var timeout=false
 #
 #var power_ups=["Bomb","Blank","Speed","Blank","Fire","Blank","Wall","Blank"]
 #var index
@@ -47,6 +47,6 @@ func _on_area_entered(area: Area2D) -> void:
 
 func _on_timer_timeout() -> void:
 	print("Timeout")
-	
+	timeout=true
 	var central_exp=get_node("/root/CentralExplosion")
 	central_exp.deactivate_power_up()
