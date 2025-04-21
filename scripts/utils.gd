@@ -19,7 +19,7 @@ func set_power_up(brick_position:Vector2):
 		#brick_position=central_exp.brick_position
 			var powerup=POWER_UP.instantiate()
 			powerup.position=brick_position	
-			powerup.name="PowerUp"
+			#powerup.name="PowerUp"
 			
 			
 			#var direction_exp=get_node("/root/DirectionExplosion")

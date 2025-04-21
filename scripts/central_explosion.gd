@@ -24,11 +24,15 @@ var scale_x
 var scale_y
 var scale_x_after_power_up=4.0
 var scale_y_after_power_up=4.0
+var timeout
 func _ready():
 		var bomb_up_applied
+		
 		var power_up=get_node("/root/game/PowerUp")
-		if power_up!=null:
+		
+		if power_up!=null and timeout!=true:
 			print("power_up here")
+			print("Timeout:",timeout)
 			bomb_up_applied=apply_bomb_up()
 			
 		if power_up==null:
@@ -55,7 +59,6 @@ func _ready():
 					brick_position=collider.get_position()
 					var sprite = collider.get_node("AnimatedSprite2D")
 					sprite.play("destroyed")
-					#await sprite.animation_finished
 					Utils.set_power_up(brick_position)
 					
 					print("finished")
@@ -196,6 +199,7 @@ func apply_bomb_up() ->bool:
 		print("Bomb Up Applied")
 		bomb_up_applied=true
 		print("Bomb up func called")
+		#$Timer.start()
 	else:
 		bomb_up_applied=false
 	return bomb_up_applied
@@ -203,3 +207,25 @@ func apply_bomb_up() ->bool:
 
 		
 			
+
+#
+#func _on_timer_timeout() -> void:
+	#timeout=true
+	#scale_x_after_power_up=4
+	#scale_y_after_power_up=4
+	#raycasts[0].target_position=Vector2(0,-64)
+	#raycasts[1].target_position=Vector2(64,0)
+	#raycasts[2].target_position=Vector2(0,64)
+	#raycasts[3].target_position=Vector2(-64,0)
+	#print("Timeout")
+
+func deactivate_power_up() -> void:
+	timeout=true
+	scale_x_after_power_up=4
+	scale_y_after_power_up=4
+	raycasts[0].target_position=Vector2(0,-64)
+	raycasts[1].target_position=Vector2(64,0)
+	raycasts[2].target_position=Vector2(0,64)
+	raycasts[3].target_position=Vector2(-64,0)
+	print("applied deactivate")
+	

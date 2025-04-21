@@ -14,7 +14,7 @@ class_name PowerUp
 var index
 
 func _ready() -> void:
-	print("path:",self.get_path())
+	#print("path:",self.get_path())
 	index=0#randi_range(0,3)
 	
 	print("POWER UP CALLED!",index)
@@ -24,14 +24,14 @@ func _ready() -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	print("ENteredddd")
+	
 	var central_exp=get_node("/root/CentralExplosion")
 	if area is Player:
 		print("Power Up acquired!!")
-		
+		$Timer.start()
 		if(index==0):
 			print("Bomb Up!")
-			central_exp.apply_bomb_up()
+			#central_exp.apply_bomb_up()
 			
 		elif(index==1):
 			print("Speed Up!")
@@ -41,4 +41,12 @@ func _on_area_entered(area: Area2D) -> void:
 			print("Fire Up!")
 		$CollisionShape2D.queue_free()
 		$AnimatedSprite2D.queue_free()
+		
 	
+
+
+func _on_timer_timeout() -> void:
+	print("Timeout")
+	
+	var central_exp=get_node("/root/CentralExplosion")
+	central_exp.deactivate_power_up()
