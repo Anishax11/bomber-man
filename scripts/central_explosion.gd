@@ -1,5 +1,4 @@
 extends Area2D
-
 class_name CentralExplosion
 var size=1
 
@@ -26,21 +25,27 @@ var scale_x_after_power_up=4.0
 var scale_y_after_power_up=4.0
 
 func _ready():
+	
 		var bomb_up_applied
+	
+		var power_up=get_node("/root/game/"+str(Utils.active))
+
+
+	
 		
-		var power_up=get_node("/root/game/PowerUp")
-		
-		if power_up!=null and power_up.timeout!=true:
+		if power_up!=null and power_up.timeout!=true and power_up.entered==true:
 			print("power_up here")
 			print("Timeout:",power_up.timeout)
 			bomb_up_applied=apply_bomb_up()
 			
+				
 		if power_up==null:
-			print("power_up not here")
+			print("power_up not here or isnt pickedup yet")
 		
 		#var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 		for i in range(4):
 			
+				
 			var explosion_instance = DIRECTIONAL_EXPLOSION.instantiate()
 			raycasts[i].global_position=global_position
 			raycasts[i].force_raycast_update()
@@ -59,6 +64,7 @@ func _ready():
 					brick_position=collider.get_position()
 					var sprite = collider.get_node("AnimatedSprite2D")
 					sprite.play("destroyed")
+					
 					Utils.set_power_up(brick_position)
 					
 					print("finished")
@@ -188,7 +194,7 @@ func _ready():
 		
 func apply_bomb_up() ->bool:
 	var bomb_up_applied
-	var power_up=get_node("/root/game/PowerUp")
+	var power_up=get_node("/root/game/"+str(Utils.active))
 	if power_up.index==0:
 		scale_x_after_power_up=8
 		scale_y_after_power_up=8
