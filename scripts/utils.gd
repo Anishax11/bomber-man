@@ -16,7 +16,7 @@ func set_power_up(brick_position:Vector2):
 			#central_exp=get_node_or_null("/root/CentralExplosion")	
 		var blank_chance=randi_range(0,1)
 		if blank_chance==0:	
-			Utils.id=Utils.id+1#prob here
+			Utils.id=Utils.id+1
 			incremented=true
 		#brick_position=central_exp.brick_position
 			var powerup=POWER_UP.instantiate()
@@ -34,7 +34,7 @@ func set_power_up(brick_position:Vector2):
 			
 		
 func get_active(current:String):
-	#increment active when id increases and player picks powerup
+	
 	active=current
 	incremented=false
 	print("active:",active)

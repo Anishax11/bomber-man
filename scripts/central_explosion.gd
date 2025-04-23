@@ -25,7 +25,7 @@ var scale_x_after_power_up=4.0
 var scale_y_after_power_up=4.0
 
 func _ready():
-	
+
 		var bomb_up_applied
 	
 		var power_up=get_node("/root/game/"+str(Utils.active))
@@ -36,7 +36,7 @@ func _ready():
 		if power_up!=null and power_up.timeout!=true and power_up.entered==true:
 			print("power_up here")
 			print("Timeout:",power_up.timeout)
-			bomb_up_applied=apply_bomb_up()
+			bomb_up_applied=apply_fire_up()
 			
 				
 		if power_up==null:
@@ -109,8 +109,9 @@ func _ready():
 					explosion_instance.animated_sprite_2d.animation_finished.connect(func():
 						
 						explosion_instance.queue_free()
-						$AnimatedSprite2D.queue_free()
-						$CollisionShape2D.queue_free()
+						#$AnimatedSprite2D.queue_free()
+						#$CollisionShape2D.queue_free()
+						queue_free()
 						
 					)
 					
@@ -185,16 +186,20 @@ func _ready():
 				explosion_instance.animated_sprite_2d.animation_finished.connect(func():
 					
 					explosion_instance.queue_free()
-					$AnimatedSprite2D.queue_free()
-					$CollisionShape2D.queue_free()
+					#$AnimatedSprite2D.queue_free()
+					#$CollisionShape2D.queue_free()
+					queue_free()
 				)
 				
 				print(animation_names[i])
 				
 		
-func apply_bomb_up() ->bool:
+func apply_fire_up() ->bool:
 	var bomb_up_applied
+	var limit_increased
 	var power_up=get_node("/root/game/"+str(Utils.active))
+	var bomb_manager=get_node("/root/game/Player/BombPlacementManager")
+
 	if power_up.index==0:
 		scale_x_after_power_up=8
 		scale_y_after_power_up=8
@@ -202,37 +207,37 @@ func apply_bomb_up() ->bool:
 		raycasts[1].target_position=Vector2(128,0)
 		raycasts[2].target_position=Vector2(0,128)
 		raycasts[3].target_position=Vector2(-128,0)
-		print("Bomb Up Applied")
+		print("fire Up Applied")
 		bomb_up_applied=true
-		print("Bomb up func called")
+		print("fire up func called")
 		#$Timer.start()
 	else:
 		bomb_up_applied=false
+	
+	if power_up.index==3:
+		limit_increased=true
+		bomb_manager.bomb_limit=4
+	else:
+		limit_increased=false
+		
 	return bomb_up_applied
-		#
+		
 
 		
 			
 
-#
-#func _on_timer_timeout() -> void:
-	#timeout=true
-	#scale_x_after_power_up=4
-	#scale_y_after_power_up=4
-	#raycasts[0].target_position=Vector2(0,-64)
-	#raycasts[1].target_position=Vector2(64,0)
-	#raycasts[2].target_position=Vector2(0,64)
-	#raycasts[3].target_position=Vector2(-64,0)
-	#print("Timeout")
+
 
 func deactivate_power_up() -> void:
+	var power_up=get_node("/root/game/"+str(Utils.active))
+	if power_up.index==0:
+		scale_x_after_power_up=4
+		scale_y_after_power_up=4
+		raycasts[0].target_position=Vector2(0,-64)
+		raycasts[1].target_position=Vector2(64,0)
+		raycasts[2].target_position=Vector2(0,64)
+		raycasts[3].target_position=Vector2(-64,0)
 	
-	scale_x_after_power_up=4
-	scale_y_after_power_up=4
-	raycasts[0].target_position=Vector2(0,-64)
-	raycasts[1].target_position=Vector2(64,0)
-	raycasts[2].target_position=Vector2(0,64)
-	raycasts[3].target_position=Vector2(-64,0)
 	print("applied deactivate")
 	
 
