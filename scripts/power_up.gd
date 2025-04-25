@@ -13,6 +13,7 @@ class_name PowerUp
 var timeout=false
 var entered=false
 var index
+var check=false
 
 func _ready() -> void:
 	#print("path:",self.get_path())
@@ -26,7 +27,7 @@ func _ready() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	
-	var central_exp=get_node("/root/CentralExplosion")
+
 	if area is Player:
 		print(self.name)
 		Utils.get_active(self.name)
@@ -44,6 +45,7 @@ func _on_area_entered(area: Area2D) -> void:
 			print("Wall Pass!")
 		elif(index==3):
 			print("Bomb Up!")
+			check=true
 		$CollisionShape2D.queue_free()
 		$AnimatedSprite2D.queue_free()
 		

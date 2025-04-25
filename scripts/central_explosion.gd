@@ -1,7 +1,7 @@
 extends Area2D
 class_name CentralExplosion
 var size=1
-
+#Trying to increase bomb limit
 @onready var raycasts: Array[RayCast2D]=[
 	$Raycasts/RayCast2DUp,
 	$Raycasts/RayCast2DRight,
@@ -23,8 +23,10 @@ var scale_x
 var scale_y
 var scale_x_after_power_up=4.0
 var scale_y_after_power_up=4.0
+var limit_increased=false
 
 func _ready():
+		print(self.name)
 
 		var bomb_up_applied
 	
@@ -35,7 +37,6 @@ func _ready():
 		
 		if power_up!=null and power_up.timeout!=true and power_up.entered==true:
 			print("power_up here")
-			print("Timeout:",power_up.timeout)
 			bomb_up_applied=apply_fire_up()
 			
 				
@@ -111,7 +112,7 @@ func _ready():
 						explosion_instance.queue_free()
 						#$AnimatedSprite2D.queue_free()
 						#$CollisionShape2D.queue_free()
-						queue_free()
+						
 						
 					)
 					
@@ -188,7 +189,7 @@ func _ready():
 					explosion_instance.queue_free()
 					#$AnimatedSprite2D.queue_free()
 					#$CollisionShape2D.queue_free()
-					queue_free()
+					
 				)
 				
 				print(animation_names[i])
@@ -196,9 +197,9 @@ func _ready():
 		
 func apply_fire_up() ->bool:
 	var bomb_up_applied
-	var limit_increased
+	
 	var power_up=get_node("/root/game/"+str(Utils.active))
-	var bomb_manager=get_node("/root/game/Player/BombPlacementManager")
+	
 
 	if power_up.index==0:
 		scale_x_after_power_up=8
@@ -215,10 +216,11 @@ func apply_fire_up() ->bool:
 		bomb_up_applied=false
 	
 	if power_up.index==3:
+		print("Truee")
 		limit_increased=true
-		bomb_manager.bomb_limit=4
-	else:
-		limit_increased=false
+		
+		
+	
 		
 	return bomb_up_applied
 		
@@ -239,6 +241,4 @@ func deactivate_power_up() -> void:
 		raycasts[3].target_position=Vector2(-64,0)
 	
 	print("applied deactivate")
-	
-
 	

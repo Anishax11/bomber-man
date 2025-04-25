@@ -5,7 +5,7 @@ var BOMB_SCENE = preload("res://scenes/bomb.tscn")
 var bombs_placed=0
 var player
 var TILE_SIZE=16
-var bomb_limit
+var bomb_limit=2
 
 
 
@@ -15,10 +15,19 @@ func _ready():
 	 
 
 func place_bomb():
-	var central_explosion=get_node("/root/CentralExplosion")
-	bomb_limit=2
-	if central_explosion.limit_increased==true:
-		bomb_limit=4
+	
+	var bomb_node=get_node("/root/bomb")
+	var central_explosion=get_node("/root/"+Utils.active_central)
+
+	
+	if central_explosion!=null:
+		print("HEEEEE")
+		if central_explosion.limit_increased==true:
+			print("Heloo")
+			bomb_limit=4
+	else:
+		bomb_limit=2
+		
 	if bombs_placed<bomb_limit:
 		var bomb=BOMB_SCENE.instantiate()
 		var player_position=player.position
@@ -38,6 +47,7 @@ func place_bomb():
 		print("BOMB")	
 	else:
 		return
+		
 func on_bomb_exploded():
 	
 	
