@@ -4,6 +4,7 @@ const POWER_UP = preload("res://scenes/power_up.tscn")
 var id=0
 var active
 var incremented=false	
+var  central_exp
 func set_power_up(brick_position:Vector2):
 		 
 		var game = get_node_or_null("/root/game")
@@ -38,3 +39,8 @@ func get_active(current:String):
 	active=current
 	incremented=false
 	print("active:",active)
+
+func central_exp_id_tracker(central:String):
+	print("CENtralexp:",central_exp)
+	central_exp=central
+	

@@ -39,7 +39,5 @@ func place_bomb():
 		
 func on_bomb_exploded():
 	
-	
-	print("func on_bomb_exploded() called")
 	bombs_placed-=1
-	print("bombs_placed:",bombs_placed)
+	

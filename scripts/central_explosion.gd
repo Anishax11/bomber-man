@@ -1,7 +1,7 @@
 extends Area2D
 class_name CentralExplosion
 var size=1
-#Trying to increase bomb limit
+#power_up_applied is always false
 @onready var raycasts: Array[RayCast2D]=[
 	$Raycasts/RayCast2DUp,
 	$Raycasts/RayCast2DRight,
@@ -23,7 +23,7 @@ var scale_x
 var scale_y
 var scale_x_after_power_up=4.0
 var scale_y_after_power_up=4.0
-
+var power_up_applied=false
 
 func _ready():
 		print(self.name)
@@ -110,8 +110,14 @@ func _ready():
 					explosion_instance.animated_sprite_2d.animation_finished.connect(func():
 						
 						explosion_instance.queue_free()
-						#$AnimatedSprite2D.queue_free()
-						#$CollisionShape2D.queue_free()
+						
+						if power_up_applied==false:	
+							queue_free()
+						#else:
+							##$AnimatedSprite2D.queue_free()
+							##$CollisionShape2D.queue_free()
+							#await  power_up.timeout==true
+							#queue_free()
 						
 						
 					)
@@ -186,20 +192,33 @@ func _ready():
 				explosion_instance.animated_sprite_2d.play(animation_names[i])
 				explosion_instance.animated_sprite_2d.animation_finished.connect(func():
 					
+					
 					explosion_instance.queue_free()
-					#$AnimatedSprite2D.queue_free()
-					#$CollisionShape2D.queue_free()
+					
+					if power_up_applied==false:	
+						print("No power up")
+						#queue_free()
+					else:
+						print("Power up here")
+					#else:
+						##$AnimatedSprite2D.queue_free()
+						##$CollisionShape2D.queue_free()
+						#await  power_up.timeout==true
+						#queue_free()
 					
 				)
 				
-				print(animation_names[i])
+				
 				
 		
 func apply_fire_up() ->bool:
 	var bomb_up_applied
 	
 	var power_up=get_node("/root/game/"+str(Utils.active))
-	
+	if power_up.index==3:
+		print("Yayy")
+		power_up_applied=true
+		Utils.central_exp_id_tracker(self.name)
 
 	if power_up.index==0:
 		scale_x_after_power_up=8
@@ -211,7 +230,8 @@ func apply_fire_up() ->bool:
 		print("fire Up Applied")
 		bomb_up_applied=true
 		print("fire up func called")
-		#$Timer.start()
+		power_up_applied=true
+		
 	else:
 		bomb_up_applied=false
 	

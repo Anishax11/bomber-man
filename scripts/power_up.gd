@@ -54,7 +54,14 @@ func _on_area_entered(area: Area2D) -> void:
 
 
 func _on_timer_timeout() -> void:
+	
 	print("Timeout")
+	var bomb_placement=get_node("/root/game/Player/BombPlacementManager")
+	bomb_placement.bomb_limit=2
+	var central_exp=get_node("/root/"+Utils.central_exp)
+	print("Central:",central_exp)
+	await central_exp.deactivate_power_up()
+	central_exp.queue_free()
 	timeout=true
-	var central_exp=get_node("/root/CentralExplosion")
-	central_exp.deactivate_power_up()
+
+	
