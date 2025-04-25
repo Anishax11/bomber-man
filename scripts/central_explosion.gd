@@ -23,7 +23,7 @@ var scale_x
 var scale_y
 var scale_x_after_power_up=4.0
 var scale_y_after_power_up=4.0
-var limit_increased=false
+
 
 func _ready():
 		print(self.name)
@@ -214,12 +214,6 @@ func apply_fire_up() ->bool:
 		#$Timer.start()
 	else:
 		bomb_up_applied=false
-	
-	if power_up.index==3:
-		print("Truee")
-		limit_increased=true
-		
-		
 	
 		
 	return bomb_up_applied

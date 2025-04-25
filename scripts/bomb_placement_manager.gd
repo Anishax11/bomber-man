@@ -15,19 +15,8 @@ func _ready():
 	 
 
 func place_bomb():
-	
-	var bomb_node=get_node("/root/bomb")
-	var central_explosion=get_node("/root/"+Utils.active_central)
 
 	
-	if central_explosion!=null:
-		print("HEEEEE")
-		if central_explosion.limit_increased==true:
-			print("Heloo")
-			bomb_limit=4
-	else:
-		bomb_limit=2
-		
 	if bombs_placed<bomb_limit:
 		var bomb=BOMB_SCENE.instantiate()
 		var player_position=player.position

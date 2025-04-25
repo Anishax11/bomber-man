@@ -27,7 +27,7 @@ func _ready() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	
-
+	var bomb_placement=get_node("/root/game/Player/BombPlacementManager")
 	if area is Player:
 		print(self.name)
 		Utils.get_active(self.name)
@@ -45,6 +45,7 @@ func _on_area_entered(area: Area2D) -> void:
 			print("Wall Pass!")
 		elif(index==3):
 			print("Bomb Up!")
+			bomb_placement.bomb_limit=4
 			check=true
 		$CollisionShape2D.queue_free()
 		$AnimatedSprite2D.queue_free()

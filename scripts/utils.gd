@@ -3,7 +3,6 @@ var brick_position
 const POWER_UP = preload("res://scenes/power_up.tscn")
 var id=0
 var active
-var active_central
 var incremented=false	
 func set_power_up(brick_position:Vector2):
 		 
@@ -39,7 +38,3 @@ func get_active(current:String):
 	active=current
 	incremented=false
 	print("active:",active)
-
-func Central(central:String):
-	active_central=central
-	print("active central called")
