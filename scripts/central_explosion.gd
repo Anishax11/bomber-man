@@ -31,11 +31,13 @@ func _ready():
 		var bomb_up_applied
 	
 		var power_up=get_node("/root/game/"+str(Utils.active))
+		
 
 
 	
 		
 		if power_up!=null and power_up.timeout!=true and power_up.entered==true:
+			
 			print("power_up here")
 			bomb_up_applied=apply_fire_up()
 			
@@ -113,11 +115,10 @@ func _ready():
 						
 						if power_up_applied==false:	
 							queue_free()
-						#else:
-							##$AnimatedSprite2D.queue_free()
-							##$CollisionShape2D.queue_free()
-							#await  power_up.timeout==true
-							#queue_free()
+						else:
+							$AnimatedSprite2D.queue_free()
+							$CollisionShape2D.queue_free()
+							
 						
 						
 					)
@@ -197,14 +198,12 @@ func _ready():
 					
 					if power_up_applied==false:	
 						print("No power up")
-						#queue_free()
+						queue_free()
 					else:
-						print("Power up here")
-					#else:
-						##$AnimatedSprite2D.queue_free()
-						##$CollisionShape2D.queue_free()
-						#await  power_up.timeout==true
-						#queue_free()
+						
+						$AnimatedSprite2D.queue_free()
+						$CollisionShape2D.queue_free()
+						
 					
 				)
 				
@@ -215,10 +214,12 @@ func apply_fire_up() ->bool:
 	var bomb_up_applied
 	
 	var power_up=get_node("/root/game/"+str(Utils.active))
+	
 	if power_up.index==3:
-		print("Yayy")
+		
 		power_up_applied=true
 		Utils.central_exp_id_tracker(self.name)
+		
 
 	if power_up.index==0:
 		scale_x_after_power_up=8

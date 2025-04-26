@@ -41,6 +41,7 @@ func get_active(current:String):
 	print("active:",active)
 
 func central_exp_id_tracker(central:String):
+	central_exp=central
 	print("CENtralexp:",central_exp)
 	central_exp=central
 	
