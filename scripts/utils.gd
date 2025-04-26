@@ -5,8 +5,11 @@ var id=0
 var active
 var incremented=false	
 var  central_exp
-func set_power_up(brick_position:Vector2):
-		 
+var central_id=0
+var deactivated=false
+
+func set_power_up(brick_position:Vector2) ->bool:
+		var blank_chance=randi_range(0,1)
 		var game = get_node_or_null("/root/game")
 		while game==null:
 			await get_tree().process_frame
@@ -15,8 +18,9 @@ func set_power_up(brick_position:Vector2):
 		#while central_exp == null:
 			#await get_tree().process_frame
 			#central_exp=get_node_or_null("/root/CentralExplosion")	
-		var blank_chance=randi_range(0,1)
+		
 		if blank_chance==0:	
+			
 			Utils.id=Utils.id+1
 			incremented=true
 		#brick_position=central_exp.brick_position
@@ -32,7 +36,9 @@ func set_power_up(brick_position:Vector2):
 			#var sprite=direction_exp.get_node("AnimatedSprite2D")
 			
 			game.add_child(powerup)
-			
+			return true
+		else:
+			return false
 		
 func get_active(current:String):
 	
@@ -45,3 +51,11 @@ func central_exp_id_tracker(central:String):
 	print("CENtralexp:",central_exp)
 	central_exp=central
 	
+func get_last_central():
+	
+	central_id+=1
+	print("HEEEEE")
+
+func get_deactivation_update():
+	deactivated=true
+	print("deactivated")

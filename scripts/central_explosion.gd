@@ -1,7 +1,7 @@
 extends Area2D
 class_name CentralExplosion
 var size=1
-#power_up_applied is always false
+
 @onready var raycasts: Array[RayCast2D]=[
 	$Raycasts/RayCast2DUp,
 	$Raycasts/RayCast2DRight,
@@ -26,11 +26,13 @@ var scale_y_after_power_up=4.0
 var power_up_applied=false
 
 func _ready():
+	
 		print(self.name)
 
 		var bomb_up_applied
 	
 		var power_up=get_node("/root/game/"+str(Utils.active))
+		
 		
 
 
@@ -69,7 +71,9 @@ func _ready():
 					sprite.play("destroyed")
 					
 					Utils.set_power_up(brick_position)
-					
+					if await Utils.set_power_up(brick_position)==true:
+						print("TRuee")
+						power_up_applied=true
 					print("finished")
 					
 					
@@ -112,9 +116,12 @@ func _ready():
 					explosion_instance.animated_sprite_2d.animation_finished.connect(func():
 						
 						explosion_instance.queue_free()
-						
-						if power_up_applied==false:	
+						if power_up_applied==false:
 							queue_free()
+							print("Freed:",self.name)
+						#if power_up!=null and power_up.power_up_applied==false:	
+							#queue_free()
+							#print("Freed:",self.name)
 						else:
 							$AnimatedSprite2D.queue_free()
 							$CollisionShape2D.queue_free()
@@ -195,10 +202,12 @@ func _ready():
 					
 					
 					explosion_instance.queue_free()
-					
-					if power_up_applied==false:	
-						print("No power up")
-						queue_free()
+					if power_up_applied==false:
+							queue_free()
+							print("Freed:",self.name)
+					#if power_up!=null and power_up.power_up_applied==false:	
+						#print("Freed:",self.name)
+						#queue_free()
 					else:
 						
 						$AnimatedSprite2D.queue_free()
@@ -217,11 +226,13 @@ func apply_fire_up() ->bool:
 	
 	if power_up.index==3:
 		
-		power_up_applied=true
+		#power_up_applied=true
 		Utils.central_exp_id_tracker(self.name)
 		
 
 	if power_up.index==0:
+		
+		
 		scale_x_after_power_up=8
 		scale_y_after_power_up=8
 		raycasts[0].target_position=Vector2(0,-128)
@@ -231,7 +242,7 @@ func apply_fire_up() ->bool:
 		print("fire Up Applied")
 		bomb_up_applied=true
 		print("fire up func called")
-		power_up_applied=true
+		#power_up_applied=true
 		
 	else:
 		bomb_up_applied=false
@@ -246,6 +257,7 @@ func apply_fire_up() ->bool:
 
 
 func deactivate_power_up() -> void:
+	Utils.get_deactivation_update()
 	var power_up=get_node("/root/game/"+str(Utils.active))
 	if power_up.index==0:
 		scale_x_after_power_up=4

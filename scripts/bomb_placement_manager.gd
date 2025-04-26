@@ -15,6 +15,7 @@ func _ready():
 	 
 
 func place_bomb():
+	
 
 	
 	if bombs_placed<bomb_limit:
