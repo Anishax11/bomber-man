@@ -9,6 +9,7 @@ var timeout=false
 var entered=false
 var index
 var check=false
+var size_of_label
 
 func _ready() -> void:
 	#print("path:",self.get_path())
@@ -30,13 +31,14 @@ func _on_area_entered(area: Area2D) -> void:
 		entered=true
 		print("timer started")
 		var Label=get_node("/root/game/Label")
+	
 		$Timer.start()
 		if(index==0):
 			Utils.get_active(self)
 			print("Fire Up!")
 		
-			Label.position=Vector2(0,-88)
-			Label.text="Explosion range doubled!"
+			Label.position=Vector2(-88,-128)
+			Label.text="Power Up Activated!\nExplosion range doubled!"
 			
 		elif(index==1):
 			print("Speed Up!")
@@ -44,8 +46,8 @@ func _on_area_entered(area: Area2D) -> void:
 			print("Wall Pass!")
 		elif(index==3):
 			print("Bomb Up!")
-			
-			Label.text="Bomb capacity increased! You can now plant 4 bombs!"
+			Label.position=Vector2(-192,-128)
+			Label.text="Power Up Activated!\nBomb capacity increased. You can now plant 4 bombs!"
 			bomb_placement.bomb_limit=4
 			check=true
 		$CollisionShape2D.queue_free()
@@ -56,7 +58,8 @@ func _on_area_entered(area: Area2D) -> void:
 
 func _on_timer_timeout() -> void:
 
-	
+	var Label=get_node("/root/game/Label")
+	Label.text=""
 	print("Timeout")
 	var bomb_placement=get_node("/root/game/Player/BombPlacementManager")
 	if bomb_placement==null:
