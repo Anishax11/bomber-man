@@ -23,34 +23,33 @@ var scale_x
 var scale_y
 var scale_x_after_power_up=4.0
 var scale_y_after_power_up=4.0
-var power_up_applied=false
+
 
 func _ready():
-	
-		print(self.name)
-
 		var bomb_up_applied
-	
-		var power_up=get_node("/root/game/"+str(Utils.active))
-		
-		
-
-
-	
-		
-		if power_up!=null and power_up.timeout!=true and power_up.entered==true:
+		for j in range(Utils.active.size()):
 			
-			print("power_up here")
-			bomb_up_applied=apply_fire_up()
+		
+			var power_up=get_node("/root/game/"+str(Utils.active[j]))
+			print(power_up)
 			
+			
+		
+			
+			if power_up!=null and power_up.timeout!=true and power_up.entered==true:
 				
-		if power_up==null:
-			print("power_up not here or isnt pickedup yet")
-		
-		#var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+				print("power_up here")
+				
+				bomb_up_applied=apply_fire_up()
+				
+					
+			if power_up==null:
+				print("power_up not here or isnt pickedup yet")
+				
+			
 		for i in range(4):
 			
-				
+			print("HEEE")	
 			var explosion_instance = DIRECTIONAL_EXPLOSION.instantiate()
 			raycasts[i].global_position=global_position
 			raycasts[i].force_raycast_update()
@@ -63,18 +62,21 @@ func _ready():
 				var distance=raycasts[i].global_position.distance_to(collision_point)
 				
 				var tiles=round(distance/16)-1
-				#print("tiles:",tiles)
+			
 				var collider=raycasts[i].get_collider()
 				if(collider is BrickWall):
 					brick_position=collider.get_position()
 					var sprite = collider.get_node("AnimatedSprite2D")
 					sprite.play("destroyed")
-					
 					Utils.set_power_up(brick_position)
-					if await Utils.set_power_up(brick_position)==true:
-						print("TRuee")
-						power_up_applied=true
-					print("finished")
+					#if await Utils.set_power_up(brick_position)==true:
+						##Utils.central_exp_id_tracker(self.name)
+						#print("Set powerup called")
+						
+					
+						
+					
+					
 					
 					
 					 
@@ -116,15 +118,10 @@ func _ready():
 					explosion_instance.animated_sprite_2d.animation_finished.connect(func():
 						
 						explosion_instance.queue_free()
-						if power_up_applied==false:
-							queue_free()
-							print("Freed:",self.name)
-						#if power_up!=null and power_up.power_up_applied==false:	
-							#queue_free()
-							#print("Freed:",self.name)
-						else:
-							$AnimatedSprite2D.queue_free()
-							$CollisionShape2D.queue_free()
+						
+						queue_free()
+					
+						
 							
 						
 						
@@ -195,23 +192,16 @@ func _ready():
 				print("else scale:",explosion_instance.scale)
 				
 				get_parent().add_child(explosion_instance) 
-				print(explosion_instance.animated_sprite_2d)  # Should not be null
-				#explosion_instance.play_animation(animation_names[i])					
+				print(explosion_instance.animated_sprite_2d) 					
 				explosion_instance.animated_sprite_2d.play(animation_names[i])
 				explosion_instance.animated_sprite_2d.animation_finished.connect(func():
 					
 					
 					explosion_instance.queue_free()
-					if power_up_applied==false:
-							queue_free()
-							print("Freed:",self.name)
-					#if power_up!=null and power_up.power_up_applied==false:	
-						#print("Freed:",self.name)
-						#queue_free()
-					else:
-						
-						$AnimatedSprite2D.queue_free()
-						$CollisionShape2D.queue_free()
+					
+					queue_free()
+				
+					
 						
 					
 				)
@@ -222,50 +212,29 @@ func _ready():
 func apply_fire_up() ->bool:
 	var bomb_up_applied
 	
-	var power_up=get_node("/root/game/"+str(Utils.active))
+	#var power_up=get_node("/root/game/"+str(Utils.active))
 	
-	if power_up.index==3:
-		
-		#power_up_applied=true
-		Utils.central_exp_id_tracker(self.name)
-		
-
-	if power_up.index==0:
+	for j in range(Utils.active.size()):
+		print(Utils.active[j])
+		if Utils.active[j].index==0:
 		
 		
-		scale_x_after_power_up=8
-		scale_y_after_power_up=8
-		raycasts[0].target_position=Vector2(0,-128)
-		raycasts[1].target_position=Vector2(128,0)
-		raycasts[2].target_position=Vector2(0,128)
-		raycasts[3].target_position=Vector2(-128,0)
-		print("fire Up Applied")
-		bomb_up_applied=true
-		print("fire up func called")
-		#power_up_applied=true
+			scale_x_after_power_up=8
+			scale_y_after_power_up=8
+			raycasts[0].target_position=Vector2(0,-128)
+			raycasts[1].target_position=Vector2(128,0)
+			raycasts[2].target_position=Vector2(0,128)
+			raycasts[3].target_position=Vector2(-128,0)
+			print("fire Up Applied")
+			bomb_up_applied=true
+			print("fire up func called")
+			break
+		else:
+			bomb_up_applied=false
 		
-	else:
-		bomb_up_applied=false
-	
-		
+			
 	return bomb_up_applied
-		
+			
 
 		
 			
-
-
-
-func deactivate_power_up() -> void:
-	Utils.get_deactivation_update()
-	var power_up=get_node("/root/game/"+str(Utils.active))
-	if power_up.index==0:
-		scale_x_after_power_up=4
-		scale_y_after_power_up=4
-		raycasts[0].target_position=Vector2(0,-64)
-		raycasts[1].target_position=Vector2(64,0)
-		raycasts[2].target_position=Vector2(0,64)
-		raycasts[3].target_position=Vector2(-64,0)
-	
-	print("applied deactivate")
-	

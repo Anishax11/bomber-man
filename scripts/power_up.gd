@@ -3,25 +3,20 @@ extends Area2D
 class_name PowerUp
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-#
-#var power_ups=["Bomb","Blank","Speed","Blank","Fire","Blank","Wall","Blank"]
-#var index
-#func _ready() -> void:
-	#index=randi_range(0,7)
-	#animated_sprite_2d.play(power_ups[index])
+
 @onready var animations=["fire","speed","wall","bomb"]
 var timeout=false
 var entered=false
 var index
 var check=false
-var power_up_applied=false
+
 func _ready() -> void:
 	#print("path:",self.get_path())
-	index=3#randi_range(0,3)
-	#print("Timeout power-up:",timeout)
+	index=randi_range(0,3)
+
 	print("POWER UP CALLED!",index)
 	animated_sprite_2d.play(animations[index])
-	power_up_applied=true
+	
 	
 
 
@@ -31,12 +26,13 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is Player:
 		
 		print(self.name)
-		Utils.get_active(self.name)
+		
 		entered=true
 		print("timer started")
 		var Label=get_node("/root/game/Label")
 		$Timer.start()
 		if(index==0):
+			Utils.get_active(self)
 			print("Fire Up!")
 		
 			Label.position=Vector2(0,-88)
@@ -63,19 +59,24 @@ func _on_timer_timeout() -> void:
 	
 	print("Timeout")
 	var bomb_placement=get_node("/root/game/Player/BombPlacementManager")
+	if bomb_placement==null:
+		print("bomb manager is NULL")
 	bomb_placement.bomb_limit=2
-	if Utils.central_exp!=null:
-		var central_explosion=get_node("/root/"+Utils.central_exp)
-		print("Central:",central_explosion)
-		await central_explosion.deactivate_power_up()
-		central_explosion.queue_free()
-		print("deactivated2:",Utils.deactivated)
-	else:
-		var central_explosion=get_node("/root/CentralExplosion"+str(Utils.central_id))
-		print("Central: /root/CentralExplosion"+str(Utils.central_id))
-		if Utils.deactivated==false:
-			await central_explosion.deactivate_power_up()
-			central_explosion.queue_free()
+	#if Utils.central_exp!=null:
+		#var central_explosion=get_node("/root/"+Utils.central_exp)
+		#print("Central:",central_explosion)
+		#
+		#central_explosion.queue_free()
+		#print("deactivated:",Utils.deactivated)
+	##if Utils.central_id!=null:
+		##var central_explosion=get_node("/root/CentralExplosion"+str(Utils.central_id))
+		##print("Central: /root/CentralExplosion"+str(Utils.central_id))
+		#if Utils.deactivated==false:
+			#print(central_explosion)
+			##await central_explosion.deactivate_power_up()
+			#central_explosion.queue_free()
+			#print("Timeout freed:",central_explosion)
+	Utils.remove_power_up(self.name)
 	timeout=true
 
 	

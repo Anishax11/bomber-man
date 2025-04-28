@@ -2,10 +2,7 @@ extends Node
 var brick_position
 const POWER_UP = preload("res://scenes/power_up.tscn")
 var id=0
-var active
-var incremented=false	
-var  central_exp
-var central_id=0
+var active=[]
 var deactivated=false
 
 func set_power_up(brick_position:Vector2) ->bool:
@@ -22,7 +19,6 @@ func set_power_up(brick_position:Vector2) ->bool:
 		if blank_chance==0:	
 			
 			Utils.id=Utils.id+1
-			incremented=true
 		#brick_position=central_exp.brick_position
 			var powerup=POWER_UP.instantiate()
 			powerup.position=brick_position	
@@ -37,25 +33,18 @@ func set_power_up(brick_position:Vector2) ->bool:
 			
 			game.add_child(powerup)
 			return true
+			
 		else:
 			return false
 		
-func get_active(current:String):
+func get_active(current):
 	
-	active=current
-	incremented=false
+	active.append(current)
+
 	print("active:",active)
 
-func central_exp_id_tracker(central:String):
-	central_exp=central
-	print("CENtralexp:",central_exp)
-	central_exp=central
+func remove_power_up(current:String):
 	
-func get_last_central():
-	
-	central_id+=1
-	print("HEEEEE")
+	active.erase(current)
 
-func get_deactivation_update():
-	deactivated=true
-	print("deactivated")
+	
