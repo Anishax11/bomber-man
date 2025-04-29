@@ -45,6 +45,8 @@ func _on_area_entered(area: Area2D) -> void:
 		elif(index==2):
 			print("Wall Pass!")
 			Utils.wall_pass()
+			Label.position=Vector2(-192,-128)
+			Label.text="Power Up Activated!\nYou can now pass through brick walls!"
 		elif(index==3):
 			print("Bomb Up!")
 			Label.position=Vector2(-192,-128)
