@@ -13,7 +13,7 @@ var size_of_label
 
 func _ready() -> void:
 	#print("path:",self.get_path())
-	index=randi_range(0,3)
+	index=2#randi_range(0,3)
 
 	print("POWER UP CALLED!",index)
 	animated_sprite_2d.play(animations[index])
@@ -44,6 +44,7 @@ func _on_area_entered(area: Area2D) -> void:
 			print("Speed Up!")
 		elif(index==2):
 			print("Wall Pass!")
+			Utils.wall_pass()
 		elif(index==3):
 			print("Bomb Up!")
 			Label.position=Vector2(-192,-128)
@@ -53,11 +54,12 @@ func _on_area_entered(area: Area2D) -> void:
 		$CollisionShape2D.queue_free()
 		$AnimatedSprite2D.queue_free()
 		
-	
+
 
 
 func _on_timer_timeout() -> void:
-
+	
+	Utils.wall_pass_deactivated()
 	var Label=get_node("/root/game/Label")
 	Label.text=""
 	print("Timeout")
@@ -79,6 +81,7 @@ func _on_timer_timeout() -> void:
 			##await central_explosion.deactivate_power_up()
 			#central_explosion.queue_free()
 			#print("Timeout freed:",central_explosion)
+			
 	Utils.remove_power_up(self.name)
 	timeout=true
 

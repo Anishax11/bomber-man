@@ -80,10 +80,10 @@ shape = SubResource("RectangleShape2D_ukcf4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0uvfo")
-animation = &"bomb"
+animation = &"wall"
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 3.0
 one_shot = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

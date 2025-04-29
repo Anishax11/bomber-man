@@ -47,4 +47,12 @@ func remove_power_up(current:String):
 	
 	active.erase(current)
 
+func wall_pass():
+	for i in range(1,19):
+		
+		
+		var brickwall=get_node("/root/game/BrickWalls/BrickWall"+str(i))
+		if brickwall!=null and brickwall.get_node("CollisionShape2D")!=null:
+			
+			brickwall.get_node("CollisionShape2D").queue_free()
 	

@@ -247,7 +247,7 @@ zoom = Vector2(2, 2)
 
 [node name="BrickWalls" type="Node" parent="."]
 
-[node name="BrickWall" parent="BrickWalls" instance=ExtResource("3_um56p")]
+[node name="BrickWall1" parent="BrickWalls" instance=ExtResource("3_um56p")]
 position = Vector2(-104, -24)
 collision_layer = 2
 
@@ -299,7 +299,7 @@ position = Vector2(-152, 104)
 [node name="BrickWall17" parent="BrickWalls" instance=ExtResource("3_um56p")]
 position = Vector2(-152, -24)
 
-[node name="BrickWall" parent="." instance=ExtResource("3_um56p")]
+[node name="BrickWall18" parent="BrickWalls" instance=ExtResource("3_um56p")]
 position = Vector2(8, -24)
 
 [node name="TileMap" type="TileMap" parent="."]
