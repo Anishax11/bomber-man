@@ -70,11 +70,12 @@ frame_progress = 0.540786
 
 [node name="RayCastUp" type="RayCast2D" parent="."]
 target_position = Vector2(0, -8)
+collision_mask = 5
 collide_with_areas = true
 
 [node name="RayCast2D2" type="RayCast2D" parent="."]
 target_position = Vector2(8, 0)
-collision_mask = 4
+collision_mask = 7
 collide_with_areas = true
 
 [node name="RayCast2DDown" type="RayCast2D" parent="."]
@@ -83,6 +84,9 @@ collide_with_areas = true
 
 [node name="RayCast2D4" type="RayCast2D" parent="."]
 target_position = Vector2(-8, 0)
-collision_mask = 4
+collision_mask = 7
 collide_with_areas = true
 script = SubResource("GDScript_qpof2")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
