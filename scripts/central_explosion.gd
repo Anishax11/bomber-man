@@ -69,16 +69,9 @@ func _ready():
 					var sprite = collider.get_node("AnimatedSprite2D")
 					sprite.play("destroyed")
 					Utils.set_power_up(brick_position)
-					#if await Utils.set_power_up(brick_position)==true:
-						##Utils.central_exp_id_tracker(self.name)
-						#print("Set powerup called")
-						
 					
 						
-					
-					
-					
-					
+
 					 
 					
 				if(tiles!=0):

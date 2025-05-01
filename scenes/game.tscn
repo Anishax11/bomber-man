@@ -274,19 +274,19 @@ position = Vector2(8, 72)
 position = Vector2(-24, 8)
 
 [node name="BrickWall9" parent="BrickWalls" instance=ExtResource("3_um56p")]
-position = Vector2(-72, 72)
+position = Vector2(-72, 88)
 
 [node name="BrickWall10" parent="BrickWalls" instance=ExtResource("3_um56p")]
-position = Vector2(40, -24)
+position = Vector2(56, -72)
 
 [node name="BrickWall11" parent="BrickWalls" instance=ExtResource("3_um56p")]
-position = Vector2(40, -8)
+position = Vector2(88, -24)
 
 [node name="BrickWall12" parent="BrickWalls" instance=ExtResource("3_um56p")]
 position = Vector2(72, 72)
 
 [node name="BrickWall13" parent="BrickWalls" instance=ExtResource("3_um56p")]
-position = Vector2(136, 8)
+position = Vector2(184, -104)
 
 [node name="BrickWall14" parent="BrickWalls" instance=ExtResource("3_um56p")]
 position = Vector2(136, -56)
@@ -343,13 +343,13 @@ position = Vector2(-152, 40)
 position = Vector2(-200, 88)
 
 [node name="BrickWall31" parent="BrickWalls" instance=ExtResource("3_um56p")]
-position = Vector2(-264, 64)
+position = Vector2(-264, 72)
 
 [node name="BrickWall32" parent="BrickWalls" instance=ExtResource("3_um56p")]
 position = Vector2(-72, -120)
 
 [node name="BrickWall33" parent="BrickWalls" instance=ExtResource("3_um56p")]
-position = Vector2(-96, -136)
+position = Vector2(-88, -136)
 
 [node name="BrickWall34" parent="BrickWalls" instance=ExtResource("3_um56p")]
 position = Vector2(-56, -72)
@@ -379,7 +379,7 @@ position = Vector2(-8, 104)
 position = Vector2(-56, -8)
 
 [node name="BrickWall43" parent="BrickWalls" instance=ExtResource("3_um56p")]
-position = Vector2(-72, 104)
+position = Vector2(-56, 104)
 
 [node name="BrickWall44" parent="BrickWalls" instance=ExtResource("3_um56p")]
 position = Vector2(72, 104)
@@ -412,7 +412,7 @@ position = Vector2(248, -72)
 position = Vector2(264, 120)
 
 [node name="BrickWall54" parent="BrickWalls" instance=ExtResource("3_um56p")]
-position = Vector2(248, 120)
+position = Vector2(248, 104)
 
 [node name="BrickWall55" parent="BrickWalls" instance=ExtResource("3_um56p")]
 position = Vector2(280, 56)
@@ -445,10 +445,10 @@ position = Vector2(168, 8)
 position = Vector2(184, 56)
 
 [node name="BrickWall65" parent="BrickWalls" instance=ExtResource("3_um56p")]
-position = Vector2(104, 120)
+position = Vector2(56, 120)
 
 [node name="BrickWall66" parent="BrickWalls" instance=ExtResource("3_um56p")]
-position = Vector2(200, 120)
+position = Vector2(216, -120)
 
 [node name="BrickWall67" parent="BrickWalls" instance=ExtResource("3_um56p")]
 position = Vector2(216, 88)
@@ -465,7 +465,7 @@ offset_right = 168.0
 offset_bottom = -168.0
 
 [node name="Enemy" parent="." instance=ExtResource("4_g012a")]
-position = Vector2(-200, -120)
+position = Vector2(248, -88)
 
 [node name="BrickWall" parent="." instance=ExtResource("3_um56p")]
 position = Vector2(-248, -72)
