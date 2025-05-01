@@ -1,29 +1,30 @@
-[gd_scene load_steps=9 format=3 uid="uid://cnoeu2a258dg3"]
+[gd_scene load_steps=11 format=3 uid="uid://cnoeu2a258dg3"]
 
-[ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="1_k84g4"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_c0msm"]
+[ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="2_k7rit"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qinnl"]
-atlas = ExtResource("1_k84g4")
+atlas = ExtResource("2_k7rit")
 region = Rect2(0, 240, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ynisu"]
-atlas = ExtResource("1_k84g4")
+atlas = ExtResource("2_k7rit")
 region = Rect2(16, 240, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q63dv"]
-atlas = ExtResource("1_k84g4")
+atlas = ExtResource("2_k7rit")
 region = Rect2(32, 240, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u8dyx"]
-atlas = ExtResource("1_k84g4")
+atlas = ExtResource("2_k7rit")
 region = Rect2(48, 240, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m2jq3"]
-atlas = ExtResource("1_k84g4")
+atlas = ExtResource("2_k7rit")
 region = Rect2(64, 240, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hl7jx"]
-atlas = ExtResource("1_k84g4")
+atlas = ExtResource("2_k7rit")
 region = Rect2(80, 240, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hg0wr"]
@@ -52,22 +53,36 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="GDScript" id="GDScript_qpof2"]
+script/source = "extends RayCast2D
+"
+
 [node name="Enemy" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_c0msm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hg0wr")
-frame_progress = 0.497931
+autoplay = "default"
+frame_progress = 0.540786
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="RayCastUp" type="RayCast2D" parent="."]
 target_position = Vector2(0, -8)
+collide_with_areas = true
 
 [node name="RayCast2D2" type="RayCast2D" parent="."]
 target_position = Vector2(8, 0)
+collision_mask = 4
+collide_with_areas = true
 
-[node name="RayCast2D3" type="RayCast2D" parent="."]
+[node name="RayCast2DDown" type="RayCast2D" parent="."]
 target_position = Vector2(0, 8)
+collide_with_areas = true
 
 [node name="RayCast2D4" type="RayCast2D" parent="."]
 target_position = Vector2(-8, 0)
+collision_mask = 4
+collide_with_areas = true
+script = SubResource("GDScript_qpof2")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cnicjsm0nkovs"]
+[gd_scene load_steps=7 format=3 uid="uid://cnicjsm0nkovs"]
 
 [ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="1_nkp3a"]
 [ext_resource type="PackedScene" uid="uid://xgc6vwgkltk1" path="res://scenes/player.tscn" id="2_gaedw"]
 [ext_resource type="PackedScene" uid="uid://mrp1gnj6wpvf" path="res://scenes/brick_wall.tscn" id="3_um56p"]
+[ext_resource type="PackedScene" uid="uid://cnoeu2a258dg3" path="res://scenes/enemy.tscn" id="4_g012a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nywt6"]
 texture = ExtResource("1_nkp3a")
@@ -312,3 +313,6 @@ offset_left = -192.0
 offset_top = -112.0
 offset_right = 152.0
 offset_bottom = -80.0
+
+[node name="Enemy" parent="." instance=ExtResource("4_g012a")]
+position = Vector2(0, 8)
