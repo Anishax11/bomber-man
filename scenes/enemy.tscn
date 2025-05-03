@@ -69,22 +69,22 @@ autoplay = "default"
 frame_progress = 0.540786
 
 [node name="RayCastUp" type="RayCast2D" parent="."]
-target_position = Vector2(0, -8)
+target_position = Vector2(0, -7)
 collision_mask = 7
 collide_with_areas = true
 
 [node name="RayCast2DRight" type="RayCast2D" parent="."]
-target_position = Vector2(8, 0)
+target_position = Vector2(7, 0)
 collision_mask = 7
 collide_with_areas = true
 
 [node name="RayCast2DDown" type="RayCast2D" parent="."]
-target_position = Vector2(0, 8)
+target_position = Vector2(0, 7)
 collision_mask = 7
 collide_with_areas = true
 
 [node name="RayCast2DLeft" type="RayCast2D" parent="."]
-target_position = Vector2(-8, 0)
+target_position = Vector2(-7, 0)
 collision_mask = 7
 collide_with_areas = true
 script = SubResource("GDScript_qpof2")
