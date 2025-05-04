@@ -12,9 +12,14 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is Player:
 		print("player entered")
 		(area as Player).die()
+	var enemy=get_node("/root/game/Enemy")	
+	var enemy2=get_node("/root/game/Enemy2")
+	if area == enemy:
 		
-	
-
+		enemy.enemy_death()
+	if area == enemy2:
+		
+		enemy2.enemy_death()
 
 	
 

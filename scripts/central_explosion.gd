@@ -49,7 +49,7 @@ func _ready():
 			
 		for i in range(4):
 			
-			print("HEEE")	
+			
 			var explosion_instance = DIRECTIONAL_EXPLOSION.instantiate()
 			raycasts[i].global_position=global_position
 			raycasts[i].force_raycast_update()

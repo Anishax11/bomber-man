@@ -66,14 +66,12 @@ func _process(delta: float) -> void:
 	
 	
 
-func _on_area_entered(area: Area2D) -> void:
-	print("entered")
-	entered=true
+
+	
 	
 
 
-func _on_area_exited(area: Area2D) -> void:
-	entered=false
+
 
 func set_location():
 	print(direction)
@@ -91,3 +89,12 @@ func set_location():
 	
 	position=Vector2(position_x,position_y)
 	print(position)
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area is Player:
+		var player=get_node("/root/game/Player")
+		player.die()
+
+func enemy_death():
+	queue_free()

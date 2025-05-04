@@ -13,7 +13,7 @@ var size_of_label
 
 func _ready() -> void:
 	#print("path:",self.get_path())
-	index=2#randi_range(0,3)
+	index=randi_range(0,3)
 
 	print("POWER UP CALLED!",index)
 	animated_sprite_2d.play(animations[index])
@@ -61,7 +61,8 @@ func _on_area_entered(area: Area2D) -> void:
 
 func _on_timer_timeout() -> void:
 	
-	Utils.wall_pass_deactivated()
+	if index==2:
+		Utils.wall_pass_deactivated()
 	var Label=get_node("/root/game/Label")
 	Label.text=""
 	print("Timeout")

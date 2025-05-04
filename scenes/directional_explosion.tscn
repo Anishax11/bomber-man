@@ -279,6 +279,7 @@ animations = [{
 size = Vector2(16, 16)
 
 [node name="DirectionalExplosion" type="Area2D"]
+collision_mask = 17
 script = ExtResource("1_skimd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

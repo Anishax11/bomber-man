@@ -179,6 +179,7 @@ height = 16.0
 
 [node name="Player" type="Area2D"]
 z_index = 5
+collision_mask = 17
 script = ExtResource("1_58jkt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -255,4 +256,5 @@ collide_with_areas = true
 [node name="BombPlacementManager" type="Node" parent="."]
 script = ExtResource("4_521ae")
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
