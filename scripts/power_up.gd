@@ -37,7 +37,7 @@ func _on_area_entered(area: Area2D) -> void:
 			Utils.get_active(self)
 			print("Fire Up!")
 		
-			Label.position=Vector2(-88,-128)
+			Label.position=Vector2(-128,-208)
 			Label.text="Power Up Activated!\nExplosion range doubled!"
 			
 		elif(index==1):
@@ -45,11 +45,11 @@ func _on_area_entered(area: Area2D) -> void:
 		elif(index==2):
 			print("Wall Pass!")
 			Utils.wall_pass()
-			Label.position=Vector2(-192,-128)
+			Label.position=Vector2(-176,-208)
 			Label.text="Power Up Activated!\nYou can now pass through brick walls!"
 		elif(index==3):
 			print("Bomb Up!")
-			Label.position=Vector2(-192,-128)
+			Label.position=Vector2(-248,-208)
 			Label.text="Power Up Activated!\nBomb capacity increased. You can now plant 4 bombs!"
 			bomb_placement.bomb_limit=4
 			check=true

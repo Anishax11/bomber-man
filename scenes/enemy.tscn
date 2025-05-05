@@ -1,7 +1,27 @@
-[gd_scene load_steps=12 format=3 uid="uid://cnoeu2a258dg3"]
+[gd_scene load_steps=17 format=3 uid="uid://cnoeu2a258dg3"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_c0msm"]
 [ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="2_k7rit"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehnkm"]
+atlas = ExtResource("2_k7rit")
+region = Rect2(96, 240, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cexkt"]
+atlas = ExtResource("2_k7rit")
+region = Rect2(112, 240, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mivdf"]
+atlas = ExtResource("2_k7rit")
+region = Rect2(128, 240, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1lq4"]
+atlas = ExtResource("2_k7rit")
+region = Rect2(144, 240, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bpop6"]
+atlas = ExtResource("2_k7rit")
+region = Rect2(160, 240, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qinnl"]
 atlas = ExtResource("2_k7rit")
@@ -29,6 +49,26 @@ region = Rect2(80, 240, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hg0wr"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehnkm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cexkt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mivdf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1lq4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bpop6")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qinnl")
@@ -69,7 +109,6 @@ script = ExtResource("1_c0msm")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hg0wr")
 autoplay = "default"
-frame_progress = 0.540786
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_1lsdb")
@@ -96,3 +135,4 @@ collide_with_areas = true
 script = SubResource("GDScript_qpof2")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

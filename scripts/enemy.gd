@@ -9,10 +9,12 @@ var speed=60
 
 var position_x
 var position_y
-var entered=true
+
 var collision_point_right
 var collision_point_left
 var found
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+
 func _ready() -> void:
 	direction=Vector2.RIGHT
 	
@@ -76,7 +78,7 @@ func _process(delta: float) -> void:
 func set_location():
 	print(direction)
 	position_x=randi_range(-264,184)
-	if(position_x>=0):
+	if(position_x>=-32):
 		position_y=randi_range(-136,120)
 	else:
 		position_y=randi_range(8,120)
@@ -97,4 +99,10 @@ func _on_area_entered(area: Area2D) -> void:
 		player.die()
 
 func enemy_death():
+	animated_sprite_2d.play("death")
+	
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+
 	queue_free()
