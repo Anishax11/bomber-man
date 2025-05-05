@@ -13,14 +13,14 @@ func _on_area_entered(area: Area2D) -> void:
 		print("player entered")
 		(area as Player).die()
 	var enemy=get_node("/root/game/Enemy")	
-	var sprite1=get_node("/root/game/Enemy/AnimatedSprite2D")
+	
 	var enemy2=get_node("/root/game/Enemy2")
-	var sprite2=get_node("/root/game/Enemy2/AnimatedSprite2D")
+	
 	if area == enemy:
-		#await sprite1.play("death")
+		print("enemy")
 		enemy.enemy_death()
 	if area == enemy2:
-		#await sprite2.play("death")
+		print("enemy")
 		enemy2.enemy_death()
 
 	

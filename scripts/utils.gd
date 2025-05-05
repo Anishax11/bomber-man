@@ -4,6 +4,8 @@ const POWER_UP = preload("res://scenes/power_up.tscn")
 var id=0
 var active=[]
 var deactivated=false
+const EXIT = preload("res://scenes/exit.tscn")
+
 
 func set_power_up(brick_position:Vector2) ->bool:
 		var blank_chance=randi_range(0,1)
@@ -12,9 +14,7 @@ func set_power_up(brick_position:Vector2) ->bool:
 			await get_tree().process_frame
 			game = get_node_or_null("/root/game")
 
-		#while central_exp == null:
-			#await get_tree().process_frame
-			#central_exp=get_node_or_null("/root/CentralExplosion")	
+	
 		
 		if blank_chance==0:	
 			
@@ -25,11 +25,6 @@ func set_power_up(brick_position:Vector2) ->bool:
 			powerup.name="PowerUp"+str(id)
 			print("utils:",powerup.name)
 			
-			#var direction_exp=get_node("/root/DirectionExplosion")
-			#while direction_exp == null:
-				#await get_tree().process_frame
-				#direction_exp=get_node_or_null("/root/CentralExplosion")	
-			#var sprite=direction_exp.get_node("AnimatedSprite2D")
 			
 			game.add_child(powerup)
 			return true
@@ -69,3 +64,16 @@ func wall_pass_deactivated():
 			collision.shape=RectangleShape2D.new()
 			collision.shape.size=Vector2(16,16)
 			brickwall.add_child(collision)	
+
+func exit(brick_position:Vector2):
+	var exit_chance=randi_range(0,50)
+	var game = get_node_or_null("/root/game")
+	while game==null:
+		await get_tree().process_frame
+		game = get_node_or_null("/root/game")
+	if exit_chance==1:
+		print("exit")
+		var exit=EXIT.instantiate()
+		exit.position=brick_position
+		game.add_child(exit)
+	

@@ -57,19 +57,23 @@ func _ready():
 			
 
 			if raycasts[i].is_colliding():
-				
+			
 				var collision_point=raycasts[i].get_collision_point()
 				var distance=raycasts[i].global_position.distance_to(collision_point)
 				
 				var tiles=round(distance/16)-1
 			
 				var collider=raycasts[i].get_collider()
+				print(collider,raycasts[i])
+				print("Type: ", typeof(collider))
+				
+				
 				if(collider is BrickWall):
 					brick_position=collider.get_position()
 					var sprite = collider.get_node("AnimatedSprite2D")
 					sprite.play("destroyed")
 					Utils.set_power_up(brick_position)
-					
+					Utils.exit(brick_position)
 						
 
 					 

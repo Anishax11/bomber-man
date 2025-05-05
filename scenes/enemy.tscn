@@ -102,12 +102,13 @@ script/source = "extends RayCast2D
 "
 
 [node name="Enemy" type="Area2D"]
-collision_layer = 16
+collision_layer = 32
 collision_mask = 7
 script = ExtResource("1_c0msm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hg0wr")
+animation = &"death"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
