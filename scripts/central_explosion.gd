@@ -73,6 +73,7 @@ func _ready():
 					var sprite = collider.get_node("AnimatedSprite2D")
 					sprite.play("destroyed")
 					Utils.set_power_up(brick_position)
+					
 					Utils.exit(brick_position)
 						
 

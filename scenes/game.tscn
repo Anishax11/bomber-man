@@ -309,9 +309,6 @@ position = Vector2(-264, -104)
 [node name="BrickWall20" parent="BrickWalls" instance=ExtResource("3_um56p")]
 position = Vector2(-264, -40)
 
-[node name="BrickWall" parent="BrickWalls" instance=ExtResource("3_um56p")]
-position = Vector2(-168, -120)
-
 [node name="BrickWall21" parent="BrickWalls" instance=ExtResource("3_um56p")]
 position = Vector2(-248, -40)
 
@@ -497,6 +494,9 @@ position = Vector2(184, 120)
 
 [node name="BrickWall82" parent="BrickWalls" instance=ExtResource("3_um56p")]
 position = Vector2(184, 88)
+
+[node name="BrickWall83" parent="BrickWalls" instance=ExtResource("3_um56p")]
+position = Vector2(-168, -120)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_6iq2i")
