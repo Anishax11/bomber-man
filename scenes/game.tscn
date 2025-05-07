@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnicjsm0nkovs"]
+[gd_scene load_steps=9 format=3 uid="uid://cnicjsm0nkovs"]
 
 [ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="1_nkp3a"]
 [ext_resource type="PackedScene" uid="uid://xgc6vwgkltk1" path="res://scenes/player.tscn" id="2_gaedw"]
@@ -237,6 +237,17 @@ texture = ExtResource("1_nkp3a")
 [sub_resource type="TileSet" id="TileSet_6iq2i"]
 physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_nywt6")
+
+[sub_resource type="FontFile" id="FontFile_y5spr"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_h6vdi"]
+font_size = 48
+font_color = Color(1, 0, 0, 1)
 
 [node name="game" type="Node2D"]
 
@@ -514,3 +525,13 @@ position = Vector2(152, -104)
 
 [node name="Enemy2" parent="." instance=ExtResource("4_g012a")]
 position = Vector2(-232, 120)
+
+[node name="Label2" type="Label" parent="."]
+z_index = 1
+offset_left = -232.0
+offset_top = -40.0
+offset_right = 160.0
+offset_bottom = 32.0
+theme_override_fonts/font = SubResource("FontFile_y5spr")
+label_settings = SubResource("LabelSettings_h6vdi")
+horizontal_alignment = 1

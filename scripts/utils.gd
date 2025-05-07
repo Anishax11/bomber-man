@@ -75,6 +75,7 @@ func exit(brick_position:Vector2,):
 			await get_tree().process_frame
 			game = get_node_or_null("/root/game")
 		var exit_chance=randi_range(0,brickwall_count)
+		
 		if exit_chance==1:
 			exit_appeared=true
 			print("exit")
