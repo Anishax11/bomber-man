@@ -10,10 +10,11 @@ func play_animation(animation:String):
 func _on_area_entered(area: Area2D) -> void:
 	
 	if area is Player:
-		print("player entered")
-		(area as Player).die()
+		print("invincible",Utils.invincible)
+		if Utils.invincible!=true:
+			(area as Player).die()
+			
 	var enemy=get_node("/root/game/Enemy")	
-	
 	var enemy2=get_node("/root/game/Enemy2")
 	
 	if area == enemy:

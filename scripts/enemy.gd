@@ -1,5 +1,5 @@
 extends Area2D
-#if enemy spawns at an occupied location,its position is automatically adjusted to another nearby location
+#add point system
 var direction:Vector2
 var speed=60
 @onready var ray_cast_2d_right: RayCast2D = $RayCast2DRight

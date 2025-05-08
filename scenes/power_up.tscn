@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bex5jqpfnoo2m"]
+[gd_scene load_steps=13 format=3 uid="uid://bex5jqpfnoo2m"]
 
 [ext_resource type="Script" path="res://scripts/power_up.gd" id="1_nfu63"]
 [ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="2_0y1gy"]
 [ext_resource type="Texture2D" uid="uid://bs0huuj20thmq" path="res://assets/PowerUpFireUp.png" id="2_liivm"]
 [ext_resource type="Texture2D" uid="uid://bj6bcprhxjoy" path="res://assets/PowerUpBombUp.png" id="2_tcdok"]
-[ext_resource type="Texture2D" uid="uid://bepe6xwl4e1xa" path="res://assets/PowerUpSpeedUp.png" id="3_kag7p"]
 [ext_resource type="Texture2D" uid="uid://c4h7nuk58nn8t" path="res://assets/PowerUpWallPass.png" id="4_ffesk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ukcf4"]
@@ -21,9 +20,9 @@ region = Rect2(0, 0, 16, 16)
 atlas = ExtResource("2_liivm")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hvdyp"]
-atlas = ExtResource("3_kag7p")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnhaq"]
+atlas = ExtResource("2_0y1gy")
+region = Rect2(64, 224, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_84mcu"]
 atlas = ExtResource("4_ffesk")
@@ -57,10 +56,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hvdyp")
+"texture": SubResource("AtlasTexture_jnhaq")
 }],
 "loop": true,
-"name": &"speed",
+"name": &"invincible",
 "speed": 5.0
 }, {
 "frames": [{
@@ -80,7 +79,7 @@ shape = SubResource("RectangleShape2D_ukcf4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0uvfo")
-animation = &"wall"
+animation = &"invincible"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 15.0
