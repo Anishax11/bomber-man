@@ -4,7 +4,7 @@ class_name PowerUp
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 # add powerup that makes the player invincible
 
-@onready var animations=["fire","invincible","wall","bomb"]
+@onready var animations=["fire","invincible","bomb"]
 var timeout=false
 var entered=false
 var index
@@ -13,7 +13,7 @@ var size_of_label
 
 func _ready() -> void:
 	#print("path:",self.get_path())
-	index=1#randi_range(0,3)
+	index=randi_range(0,2)
 
 	print("POWER UP CALLED!",index)
 	animated_sprite_2d.play(animations[index])
@@ -47,11 +47,6 @@ func _on_area_entered(area: Area2D) -> void:
 			Utils.invincible_power_up()
 			
 		elif(index==2):
-			print("Wall Pass!")
-			#Utils.wall_pass()
-			#Label.position=Vector2(-176,-208)
-			#Label.text="Power Up Activated!\nYou can now pass through brick walls!"
-		elif(index==3):
 			print("Bomb Up!")
 			Label.position=Vector2(-248,-208)
 			Label.text="Power Up Activated!\nBomb capacity increased. You can now plant 4 bombs!"
@@ -65,8 +60,8 @@ func _on_area_entered(area: Area2D) -> void:
 
 func _on_timer_timeout() -> void:
 	
-	if index==2:
-		Utils.wall_pass_deactivated()
+	
+		
 	var Label=get_node("/root/game/Label")
 	Label.text=""
 	print("Timeout")

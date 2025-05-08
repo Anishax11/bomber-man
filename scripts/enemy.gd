@@ -95,8 +95,9 @@ func set_location():
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is Player:
-		var player=get_node("/root/game/Player")
-		player.die()
+		if Utils.invincible!=true:
+			var player=get_node("/root/game/Player")
+			player.die()
 
 func enemy_death():
 	animated_sprite_2d.play("death")

@@ -44,28 +44,6 @@ func remove_power_up(current:String):
 	
 	active.erase(current)
 
-func wall_pass():
-	for i in range(1,19):
-		
-		
-		var brickwall=get_node("/root/game/BrickWalls/BrickWall"+str(i))
-		if brickwall!=null and brickwall.get_node("CollisionShape2D")!=null:
-			
-			brickwall.get_node("CollisionShape2D").queue_free()
-	
-func wall_pass_deactivated():
-	
-	
-	for i in range(1,19):
-		
-		print("/root/game/BrickWalls/BrickWall"+str(i))
-		var brickwall=get_node("/root/game/BrickWalls/BrickWall"+str(i))
-		
-		if brickwall!=null:
-			var collision=CollisionShape2D.new()
-			collision.shape=RectangleShape2D.new()
-			collision.shape.size=Vector2(16,16)
-			brickwall.add_child(collision)	
 
 func exit(brick_position:Vector2,):
 	if exit_appeared==false:
