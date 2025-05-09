@@ -72,7 +72,8 @@ func _on_timer_timeout() -> void:
 	
 			
 	Utils.remove_power_up(self.name)
-	Utils.invincible=false
+	if index==1:
+		Utils.invincible=false
 	timeout=true
 
 	

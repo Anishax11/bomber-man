@@ -19,9 +19,6 @@ func _ready() -> void:
 	direction=Vector2.RIGHT
 	
 	
-	set_location()
-	
-	
 func _process(delta: float) -> void:
 	
 	for i in range(0,8):
@@ -75,22 +72,6 @@ func _process(delta: float) -> void:
 
 
 
-func set_location():
-	print(direction)
-	position_x=randi_range(-264,184)
-	if(position_x>=-32):
-		position_y=randi_range(-136,120)
-	else:
-		position_y=randi_range(8,120)
-	position_x=(round(position_x/8)*8)
-	position_y=(round(position_y/8)*8)
-	if(position_x==(round(position_x/16)*16)):
-		position_x-=8
-	if(position_y==(round(position_y/16)*16)):
-		position_y-=8
-	
-	position=Vector2(position_x,position_y)
-	print(position)
 
 
 func _on_area_entered(area: Area2D) -> void:

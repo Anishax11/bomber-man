@@ -9,6 +9,21 @@ var exit_appeared=false
 var brickwall_count=83
 var invincible=false
 var label
+var position_x
+var position_y
+var initial_position_x: Array[int]=[]
+var initial_position_y: Array[int]=[]
+const ENEMY = preload("res://scenes/enemy.tscn")
+func _ready() -> void:
+	
+	var game = get_node_or_null("/root/game")
+	while game==null:
+		await get_tree().process_frame
+		game = get_node_or_null("/root/game")
+	
+	for i in range(0,5):
+		set_location(i)
+	
 func set_power_up(brick_position:Vector2) ->bool:
 		brickwall_count-=1
 		var blank_chance=randi_range(0,1)
@@ -83,3 +98,47 @@ func create_labels(label_position:Vector2,label_text:String):
 	label.position=label_position
 	label.text=label_text	
 	game.add_child(label)
+
+
+
+func set_location(enemy_number:int):
+	
+	var enemy=ENEMY.instantiate()
+	enemy.name="Enemy"+str(enemy_number)
+	print(enemy.name)
+	if position_x!=null:
+		
+		initial_position_x.append(position_x)
+		initial_position_y.append(position_y)
+		
+		
+	position_x=randi_range(-264,184)
+	if(position_x>=-32):
+		position_y=randi_range(-136,120)
+	else:
+		position_y=randi_range(8,120)
+	position_x=(round(position_x/8)*8)
+	position_y=(round(position_y/8)*8)
+	if(position_x==(round(position_x/16)*16)):
+		position_x-=8
+	if(position_y==(round(position_y/16)*16)):
+		position_y-=8
+		
+	for i in range(0,initial_position_x.size()):
+		while (initial_position_x[i]==position_x or initial_position_y[i]==position_y):	
+			position_x=randi_range(-264,184)
+			if(position_x>=-32):
+				position_y=randi_range(-136,120)
+			else:
+				position_y=randi_range(8,120)
+			position_x=(round(position_x/8)*8)
+			position_y=(round(position_y/8)*8)
+			if(position_x==(round(position_x/16)*16)):
+				position_x-=8
+			if(position_y==(round(position_y/16)*16)):
+				position_y-=8
+		
+	enemy.position=Vector2(position_x,position_y)
+	print("enemy at:",enemy.position)
+	var game = get_node("/root/game")
+	game.add_child(enemy)

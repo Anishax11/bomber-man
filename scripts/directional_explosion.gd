@@ -13,16 +13,15 @@ func _on_area_entered(area: Area2D) -> void:
 		print("invincible",Utils.invincible)
 		if Utils.invincible!=true:
 			(area as Player).die()
-			
-	var enemy=get_node("/root/game/Enemy")	
-	var enemy2=get_node("/root/game/Enemy2")
 	
-	if area == enemy:
-		print("enemy")
-		enemy.enemy_death()
-	if area == enemy2:
-		print("enemy")
-		enemy2.enemy_death()
+	else:
+		for i in range(0,5)	:	
+			var enemy=get_node("/root/game/Enemy"+str(i))	
+			
+			if area == enemy:
+				print("enemy")
+				enemy.enemy_death()
+			
 
 	
 
