@@ -199,13 +199,13 @@ script = ExtResource("3_0x1tm")
 
 [node name="tophorizontalleft" type="RayCast2D" parent="Raycasts/Horizontal/left"]
 position = Vector2(-3, -6)
-target_position = Vector2(-2, 0)
+target_position = Vector2(-1.5, 0)
 collision_mask = 14
 collide_with_areas = true
 
 [node name="bottomhorizontalleft" type="RayCast2D" parent="Raycasts/Horizontal/left"]
 position = Vector2(-3, 6)
-target_position = Vector2(-2, 0)
+target_position = Vector2(-1.5, 0)
 collision_mask = 14
 collide_with_areas = true
 
@@ -213,13 +213,13 @@ collide_with_areas = true
 
 [node name="tophorizontalright" type="RayCast2D" parent="Raycasts/Horizontal/right"]
 position = Vector2(4, -6)
-target_position = Vector2(2, 0)
+target_position = Vector2(1.5, 0)
 collision_mask = 14
 collide_with_areas = true
 
 [node name="bottomhorizontalright" type="RayCast2D" parent="Raycasts/Horizontal/right"]
 position = Vector2(3, 6)
-target_position = Vector2(2, 0)
+target_position = Vector2(1.5, 0)
 collision_mask = 14
 collide_with_areas = true
 

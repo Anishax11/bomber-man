@@ -20,7 +20,7 @@ func _ready() -> void:
 	
 	
 	set_location()
-	#position=Vector2(232,-88)
+	
 	
 func _process(delta: float) -> void:
 	
@@ -105,5 +105,9 @@ func enemy_death():
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
+
+	
+	
+	
 
 	queue_free()

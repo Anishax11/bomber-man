@@ -8,6 +8,7 @@ const EXIT = preload("res://scenes/exit.tscn")
 var exit_appeared=false
 var brickwall_count=83
 var invincible=false
+var label
 func set_power_up(brick_position:Vector2) ->bool:
 		brickwall_count-=1
 		var blank_chance=randi_range(0,1)
@@ -72,4 +73,13 @@ func exit(brick_position:Vector2,):
 func invincible_power_up():
 	invincible=true
 	
+func create_labels(label_position:Vector2,label_text:String):
+	var game = get_node("/root/game")
+	const LABEL = preload("res://scenes/label.tscn")
+	if label!=null:
+		label.queue_free()
+	label=LABEL.instantiate()
 	
+	label.position=label_position
+	label.text=label_text	
+	game.add_child(label)
