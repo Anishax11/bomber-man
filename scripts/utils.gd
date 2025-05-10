@@ -15,7 +15,12 @@ var initial_position_x: Array[int]=[]
 var initial_position_y: Array[int]=[]
 const ENEMY = preload("res://scenes/enemy.tscn")
 var restarted=false
-
+#func _ready() -> void:
+	#
+	#var game = get_node_or_null("/root/game")
+	#while game==null:
+		#await get_tree().process_frame
+		#game = get_node_or_null("/root/game")
 	
 	
 	
@@ -132,6 +137,8 @@ func set_location(enemy_number:int):
 				position_x-=8
 			if(position_y==(round(position_y/16)*16)):
 				position_y-=8
+	
+	
 		
 	enemy.position=Vector2(position_x,position_y)
 	print("enemy at:",enemy.position)

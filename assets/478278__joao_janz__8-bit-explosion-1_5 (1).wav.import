@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bgr14ddiksvni"
+path="res://.godot/imported/478278__joao_janz__8-bit-explosion-1_5 (1).wav-2d5221d1a792e3f97a4ac0979748e9ae.sample"
+
+[deps]
+
+source_file="res://assets/478278__joao_janz__8-bit-explosion-1_5 (1).wav"
+dest_files=["res://.godot/imported/478278__joao_janz__8-bit-explosion-1_5 (1).wav-2d5221d1a792e3f97a4ac0979748e9ae.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

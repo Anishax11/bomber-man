@@ -60,27 +60,25 @@ func _on_area_entered(area: Area2D) -> void:
 func _on_timer_timeout() -> void:
 	
 	
-		
+	print("Timeout")	
 	if Utils.label!=null:
 		
 		Utils.label.queue_free()
-	print("Timeout")
+	
 	var bomb_placement=get_node("/root/game/Player/BombPlacementManager")
 	if bomb_placement==null:
 		print("bomb manager is NULL")
-		
-	
-	
 			
-	Utils.remove_power_up(self.name)
+	
 	for j in range(Utils.active.size()):
-		#print(Utils.active[j])
-		if Utils.active[j].index==2:
+		
+		if Utils.active[j]!=null and Utils.active[j].index==2:
 			bomb_placement.bomb_limit=4
 		elif j==Utils.active.size()-1:
 			bomb_placement.bomb_limit=2
+			
 	if index==1:
 		Utils.invincible=false
-	timeout=true
-
 	
+	Utils.remove_power_up(self.name)
+	timeout=true

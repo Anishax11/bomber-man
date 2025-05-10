@@ -17,12 +17,6 @@ var found
 
 func _ready() -> void:
 	direction=Vector2.RIGHT
-	
-	
-func _process(delta: float) -> void:
-	var label=get_node("/root/game/Label2")	
-	if label.text=="You Win!!":
-		return
 	for i in range(0,8):
 		if position.y==104-i*32:
 			for j in range(0,17):#if position is assigned at occupied location,enemy moves left right
@@ -40,10 +34,16 @@ func _process(delta: float) -> void:
 				direction=Vector2.DOWN
 				print("UP down")
 				break
+	
+func _process(delta: float) -> void:
+	var label=get_node("/root/game/Label2")	
+	if label.text=="You Win!!":
+		return
+	
 				
 	position+=direction*speed*delta
 	if ray_cast_2d_right.is_colliding():
-		#print("right colliding")
+		
 		collision_point_right=ray_cast_2d_right.get_collision_point()
 		direction=Vector2.LEFT
 		$AnimatedSprite2D.flip_h
