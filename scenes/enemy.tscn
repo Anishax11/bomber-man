@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cnoeu2a258dg3"]
+[gd_scene load_steps=17 format=3 uid="uid://cnoeu2a258dg3"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_c0msm"]
 [ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="2_k7rit"]
@@ -22,10 +22,6 @@ region = Rect2(144, 240, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_bpop6"]
 atlas = ExtResource("2_k7rit")
 region = Rect2(160, 240, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_as6mu"]
-atlas = ExtResource("2_k7rit")
-region = Rect2(117, 330, 13, 15)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qinnl"]
 atlas = ExtResource("2_k7rit")
@@ -68,9 +64,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bpop6")
-}, {
-"duration": 4.0,
-"texture": SubResource("AtlasTexture_as6mu")
 }],
 "loop": false,
 "name": &"death",
@@ -115,7 +108,6 @@ script = ExtResource("1_c0msm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hg0wr")
-animation = &"death"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

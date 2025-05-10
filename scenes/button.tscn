@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcn08h5rafive"]
+
+[ext_resource type="Script" path="res://scenes/button.gd" id="1_r65gh"]
+
+[node name="Button" type="Button"]
+top_level = true
+anchors_preset = -1
+anchor_right = 0.102
+anchor_bottom = 0.056
+offset_left = -96.0
+offset_right = -77.504
+offset_bottom = 3.712
+text = "[ Restart ]"
+script = ExtResource("1_r65gh")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]

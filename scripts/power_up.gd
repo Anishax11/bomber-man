@@ -68,10 +68,17 @@ func _on_timer_timeout() -> void:
 	var bomb_placement=get_node("/root/game/Player/BombPlacementManager")
 	if bomb_placement==null:
 		print("bomb manager is NULL")
-	bomb_placement.bomb_limit=2
+		
+	
 	
 			
 	Utils.remove_power_up(self.name)
+	for j in range(Utils.active.size()):
+		#print(Utils.active[j])
+		if Utils.active[j].index==2:
+			bomb_placement.bomb_limit=4
+		elif j==Utils.active.size()-1:
+			bomb_placement.bomb_limit=2
 	if index==1:
 		Utils.invincible=false
 	timeout=true

@@ -520,10 +520,9 @@ layer_0/tile_data = PackedInt32Array(-589842, 196608, 3, -524306, 196608, 3, -45
 
 [node name="Label2" type="Label" parent="."]
 z_index = 1
-offset_left = -232.0
-offset_top = -40.0
-offset_right = 160.0
-offset_bottom = 32.0
+offset_left = -240.0
+offset_top = -72.0
+offset_right = 152.0
 theme_override_fonts/font = SubResource("FontFile_y5spr")
 label_settings = SubResource("LabelSettings_h6vdi")
 horizontal_alignment = 1

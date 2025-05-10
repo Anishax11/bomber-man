@@ -1,5 +1,5 @@
 extends Area2D
-#add point system
+
 var direction:Vector2
 var speed=60
 @onready var ray_cast_2d_right: RayCast2D = $RayCast2DRight
@@ -20,7 +20,9 @@ func _ready() -> void:
 	
 	
 func _process(delta: float) -> void:
-	
+	var label=get_node("/root/game/Label2")	
+	if label.text=="You Win!!":
+		return
 	for i in range(0,8):
 		if position.y==104-i*32:
 			for j in range(0,17):#if position is assigned at occupied location,enemy moves left right

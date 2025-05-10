@@ -14,15 +14,10 @@ var position_y
 var initial_position_x: Array[int]=[]
 var initial_position_y: Array[int]=[]
 const ENEMY = preload("res://scenes/enemy.tscn")
-func _ready() -> void:
+var restarted=false
+
 	
-	var game = get_node_or_null("/root/game")
-	while game==null:
-		await get_tree().process_frame
-		game = get_node_or_null("/root/game")
 	
-	for i in range(0,5):
-		set_location(i)
 	
 func set_power_up(brick_position:Vector2) ->bool:
 		brickwall_count-=1
@@ -142,3 +137,4 @@ func set_location(enemy_number:int):
 	print("enemy at:",enemy.position)
 	var game = get_node("/root/game")
 	game.add_child(enemy)
+	print("Donw")
