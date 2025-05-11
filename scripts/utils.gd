@@ -15,12 +15,7 @@ var initial_position_x: Array[int]=[]
 var initial_position_y: Array[int]=[]
 const ENEMY = preload("res://scenes/enemy.tscn")
 var restarted=false
-#func _ready() -> void:
-	#
-	#var game = get_node_or_null("/root/game")
-	#while game==null:
-		#await get_tree().process_frame
-		#game = get_node_or_null("/root/game")
+
 	
 	
 	
@@ -56,10 +51,10 @@ func get_active(current):
 
 	print("active:",active)
 
-func remove_power_up(current:String):
-	
+func remove_power_up(current):
+	print("current:",current)
 	active.erase(current)
-
+	print("active after erase:",active)
 
 func exit(brick_position:Vector2,):
 	if exit_appeared==false:

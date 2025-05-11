@@ -23,7 +23,7 @@ var scale_x
 var scale_y
 var scale_x_after_power_up=4.0
 var scale_y_after_power_up=4.0
-
+var probability
 
 func _ready():
 		
@@ -73,9 +73,11 @@ func _ready():
 					brick_position=collider.get_position()
 					var sprite = collider.get_node("AnimatedSprite2D")
 					sprite.play("destroyed")
-					Utils.set_power_up(brick_position)
-					
-					Utils.exit(brick_position)
+					probability=randi_range(0,1)
+					if probability==0:
+						Utils.set_power_up(brick_position)
+					elif probability==1:
+						Utils.exit(brick_position)
 						
 
 					 
@@ -215,7 +217,7 @@ func apply_fire_up() ->bool:
 	
 	for j in range(Utils.active.size()):
 		print(Utils.active[j])
-		if Utils.active[j].index==0:
+		if Utils.active[j]!=null and Utils.active[j].index==0:
 		
 		
 			scale_x_after_power_up=8

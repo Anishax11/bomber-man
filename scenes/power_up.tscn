@@ -70,7 +70,7 @@ sprite_frames = SubResource("SpriteFrames_0uvfo")
 animation = &"bomb"
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 7.0
 one_shot = true
 
 [node name="PowerUpSound" type="AudioStreamPlayer2D" parent="."]

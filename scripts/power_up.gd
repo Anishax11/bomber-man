@@ -41,12 +41,14 @@ func _on_area_entered(area: Area2D) -> void:
 			
 		elif(index==1):
 			print("Invincible")
+			Utils.get_active(self)
 			Utils.create_labels(Vector2(-248,-208),"Power Up Activated!\nPlayer is immortal for the next 15 seconds!")
 			
 			Utils.invincible_power_up()
 			
 		elif(index==2):
 			print("Bomb Up!")
+			Utils.get_active(self)
 			Utils.create_labels(Vector2(-248,-208),"Power Up Activated!\nBomb capacity increased. You can now plant 4 bombs!")
 			
 			bomb_placement.bomb_limit=4
@@ -71,20 +73,33 @@ func _on_timer_timeout() -> void:
 		print("bomb manager is NULL")
 			
 	
+	
+			
+	if Utils.active.size()==1 and Utils.active[0].index==1:
+		print("entered previous if cond")
+		Utils.invincible=false
+	
+	if Utils.active.size()==1 and Utils.active[0].index==2:
+		print("entered previous if cond")
+		bomb_placement.bomb_limit=2
+		
+	Utils.remove_power_up(self)
+	
+	for j in range(0,Utils.active.size()):
+		print("entered for loop")
+		if Utils.active[j]!=null and Utils.active[j].index==1:
+			print("entered if cond")
+			Utils.invincible=true
+		elif j==Utils.active.size()-1:
+			print("entered else cond")
+			Utils.invincible=false
+	
 	for j in range(Utils.active.size()):
 		
 		if Utils.active[j]!=null and Utils.active[j].index==2:
 			bomb_placement.bomb_limit=4
 		elif j==Utils.active.size()-1:
 			bomb_placement.bomb_limit=2
-			
-	#if index==1:
-		#Utils.invincible=false
-	for j in range(Utils.active.size()):
-		
-		if Utils.active[j]!=null and Utils.active[j].index==1:
-			Utils.invincible=true
-		elif j==Utils.active.size()-1:
-			Utils.invincible=false
-	Utils.remove_power_up(self.name)
+					
+	print("after:",Utils.active)
 	timeout=true
