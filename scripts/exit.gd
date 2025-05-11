@@ -9,6 +9,7 @@ func _on_area_entered(area: Area2D) -> void:
 		var Label=get_node("/root/game/Label2")
 		
 		Label.text="You Win!!"
+		$Victory.play()
 		var button=BUTTON.instantiate()
 		button.position=Vector2(-120,0)
 		button.text="[ Replay ]"

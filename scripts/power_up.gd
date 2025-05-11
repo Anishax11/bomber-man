@@ -25,6 +25,7 @@ func _on_area_entered(area: Area2D) -> void:
 	var game = get_node_or_null("/root/game")
 	var bomb_placement=get_node("/root/game/Player/BombPlacementManager")
 	if area is Player:
+		$PowerUpSound.play()
 		print(self.name)
 		entered=true
 		print("timer started")
@@ -77,8 +78,13 @@ func _on_timer_timeout() -> void:
 		elif j==Utils.active.size()-1:
 			bomb_placement.bomb_limit=2
 			
-	if index==1:
-		Utils.invincible=false
-	
+	#if index==1:
+		#Utils.invincible=false
+	for j in range(Utils.active.size()):
+		
+		if Utils.active[j]!=null and Utils.active[j].index==1:
+			Utils.invincible=true
+		elif j==Utils.active.size()-1:
+			Utils.invincible=false
 	Utils.remove_power_up(self.name)
 	timeout=true

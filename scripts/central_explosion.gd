@@ -26,6 +26,7 @@ var scale_y_after_power_up=4.0
 
 
 func _ready():
+		
 		var bomb_up_applied
 		for j in range(Utils.active.size()):
 			

@@ -68,7 +68,7 @@ func die():
 	print("you have died")
 	is_dead=true
 	animated_sprite_2d.play("death")
-
+	$Death.play()
 	
 	
 	

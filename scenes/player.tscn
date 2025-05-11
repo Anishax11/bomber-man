@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://xgc6vwgkltk1"]
+[gd_scene load_steps=28 format=3 uid="uid://xgc6vwgkltk1"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_58jkt"]
 [ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="1_fqqfr"]
 [ext_resource type="Script" path="res://scripts/raycasts.gd" id="3_0x1tm"]
 [ext_resource type="Script" path="res://scripts/bomb_placement_manager.gd" id="4_521ae"]
+[ext_resource type="AudioStream" uid="uid://qvx5pcd801fh" path="res://assets/495541__lilmati__retro-death.wav" id="5_hj8om"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l7xot"]
 atlas = ExtResource("1_fqqfr")
@@ -255,6 +256,9 @@ collide_with_areas = true
 
 [node name="BombPlacementManager" type="Node" parent="."]
 script = ExtResource("4_521ae")
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_hj8om")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

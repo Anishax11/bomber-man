@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bex5jqpfnoo2m"]
+[gd_scene load_steps=12 format=3 uid="uid://bex5jqpfnoo2m"]
 
 [ext_resource type="Script" path="res://scripts/power_up.gd" id="1_nfu63"]
 [ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="2_0y1gy"]
 [ext_resource type="Texture2D" uid="uid://bs0huuj20thmq" path="res://assets/PowerUpFireUp.png" id="2_liivm"]
 [ext_resource type="Texture2D" uid="uid://bj6bcprhxjoy" path="res://assets/PowerUpBombUp.png" id="2_tcdok"]
+[ext_resource type="AudioStream" uid="uid://bo7gn11f7pe54" path="res://assets/power_up.wav" id="5_taspw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ukcf4"]
 
@@ -71,6 +72,9 @@ animation = &"bomb"
 [node name="Timer" type="Timer" parent="."]
 wait_time = 15.0
 one_shot = true
+
+[node name="PowerUpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_taspw")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
