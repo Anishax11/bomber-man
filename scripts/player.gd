@@ -14,6 +14,7 @@ func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout#wait for utils
 	
 	for i in range(0,5):
+		
 		Utils.set_location(i)
 		
 		

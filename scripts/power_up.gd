@@ -76,22 +76,22 @@ func _on_timer_timeout() -> void:
 	
 			
 	if Utils.active.size()==1 and Utils.active[0].index==1:
-		print("entered previous if cond")
+		#print("entered previous if cond")
 		Utils.invincible=false
 	
 	if Utils.active.size()==1 and Utils.active[0].index==2:
-		print("entered previous if cond")
+		#print("entered previous if cond")
 		bomb_placement.bomb_limit=2
 		
 	Utils.remove_power_up(self)
 	
 	for j in range(0,Utils.active.size()):
-		print("entered for loop")
+		#print("entered for loop")
 		if Utils.active[j]!=null and Utils.active[j].index==1:
-			print("entered if cond")
+			#print("entered if cond")
 			Utils.invincible=true
 		elif j==Utils.active.size()-1:
-			print("entered else cond")
+			#print("entered else cond")
 			Utils.invincible=false
 	
 	for j in range(Utils.active.size()):

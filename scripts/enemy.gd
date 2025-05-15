@@ -9,10 +9,13 @@ var speed=60
 
 var position_x
 var position_y
-
 var collision_point_right
 var collision_point_left
+var collision_point_up
+var collision_point_down
 var found
+var right_collided=false
+var up_collided=false
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready() -> void:
@@ -34,6 +37,8 @@ func _ready() -> void:
 				direction=Vector2.DOWN
 				print("UP down")
 				break
+				
+	
 	
 func _process(delta: float) -> void:
 	var label=get_node("/root/game/Label2")	
@@ -49,30 +54,30 @@ func _process(delta: float) -> void:
 		$AnimatedSprite2D.flip_h
 		
 	elif ray_cast_2d_left.is_colliding():
-		#print("left colliding")
+		
 		collision_point_left=ray_cast_2d_left.get_collision_point()
 		$AnimatedSprite2D.flip_h
 		direction=Vector2.RIGHT	
 		
 	elif ray_cast_up.is_colliding():
-		#$AnimatedSprite2D.flip_h
+		collision_point_up=ray_cast_up.get_collision_point()
 		direction=Vector2.DOWN
 		#print("up colliding",direction)
 		
 	elif ray_cast_2d_down.is_colliding():
-		#$AnimatedSprite2D.flip_h
+		collision_point_down=ray_cast_2d_down.get_collision_point()
 		direction=Vector2.UP
-		#print("down colliding")
 	
 	
-	
-
-
-	
-	
-
-
-
+	if right_collided==false and collision_point_right!=null and collision_point_left!=null and collision_point_right.distance_to(collision_point_left)==16:
+		direction=Vector2.UP
+		right_collided=true
+		print("enemy right_collided")
+		
+	if up_collided==false and collision_point_up!=null and collision_point_down!=null and collision_point_up.distance_to(collision_point_down)==16:
+		direction=Vector2.RIGHT
+		up_collided=true
+		print("enemy up_collided")
 
 
 
@@ -81,7 +86,7 @@ func _on_area_entered(area: Area2D) -> void:
 		if Utils.invincible!=true:
 			var player=get_node("/root/game/Player")
 			player.die()
-
+	
 func enemy_death():
 	animated_sprite_2d.play("death")
 	
@@ -89,8 +94,5 @@ func enemy_death():
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 
-	
-	
-	
 
 	queue_free()

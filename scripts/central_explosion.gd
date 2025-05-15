@@ -31,7 +31,7 @@ func _ready():
 		for j in range(Utils.active.size()):
 			
 		
-			var power_up=get_node("/root/game/"+str(Utils.active[j]))
+			var power_up=get_node("/root/game/"+(Utils.active[j]).name)
 			print(power_up)
 			
 			

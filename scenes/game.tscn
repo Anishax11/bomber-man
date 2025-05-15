@@ -526,3 +526,9 @@ offset_right = 152.0
 theme_override_fonts/font = SubResource("FontFile_y5spr")
 label_settings = SubResource("LabelSettings_h6vdi")
 horizontal_alignment = 1
+
+[node name="Label1" type="Label" parent="."]
+offset_left = -112.0
+offset_top = 144.0
+offset_right = 24.0
+offset_bottom = 168.0

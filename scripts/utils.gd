@@ -15,9 +15,9 @@ var initial_position_x: Array[int]=[]
 var initial_position_y: Array[int]=[]
 const ENEMY = preload("res://scenes/enemy.tscn")
 var restarted=false
-
-	
-	
+var skip_invincible=false
+var skip_fire=false	
+var skip_bomb=false	
 	
 func set_power_up(brick_position:Vector2) ->bool:
 		brickwall_count-=1
@@ -44,16 +44,52 @@ func set_power_up(brick_position:Vector2) ->bool:
 			
 		else:
 			return false
-		
-func get_active(current):
-	
-	active.append(current)
 
-	print("active:",active)
+			
+func get_active(current):
+	var string=""
+	active.append(current)
+	var label1=get_node("/root/game/Label1")
+	for i in range(0,active.size()):
+		if skip_invincible!=true and skip_fire!=true and skip_bomb!=true:	
+			label1.text+="Active PowerUps:\n"
+		if skip_fire!=true and active[i].index==0:
+			if skip_bomb==true or skip_invincible==true:
+				string=",Fire"
+			else:
+				string="Fire"
+			skip_fire=true
+			
+		elif skip_invincible!=true and active[i].index==1:
+			if skip_bomb==true or skip_fire==true:
+				string=",invincible"
+			else:
+				string="invincible"
+			skip_invincible=true
+			
+		elif skip_bomb!=true and active[i].index==2:
+			if skip_invincible==true or skip_fire==true:
+				string=",Bomb"
+			else:
+				string="Bomb"
+			skip_bomb=true
+		
+		label1.text+=string
+	
 
 func remove_power_up(current):
-	print("current:",current)
+	var label1=get_node("/root/game/Label1")
+	if current.index==0:
+		skip_fire=true
+		#label1.text="Active PowerUps:\n"
+		#if skip_bomb!=true and skip_invincible!=true:
+			#label1.text+="Bomb,Invincible"
+	if current.index==1:
+		skip_invincible=true
+	if current.index==2:
+		skip_bomb=true	
 	active.erase(current)
+	current.queue_free()
 	print("active after erase:",active)
 
 func exit(brick_position:Vector2,):
@@ -97,7 +133,10 @@ func create_labels(label_position:Vector2,label_text:String):
 
 
 func set_location(enemy_number:int):
-	
+	if restarted==true:
+		initial_position_x.clear()
+		initial_position_y.clear()
+		restarted=false
 	var enemy=ENEMY.instantiate()
 	enemy.name="Enemy"+str(enemy_number)
 	print(enemy.name)
@@ -112,6 +151,7 @@ func set_location(enemy_number:int):
 		position_y=randi_range(-136,120)
 	else:
 		position_y=randi_range(8,120)
+		
 	position_x=(round(position_x/8)*8)
 	position_y=(round(position_y/8)*8)
 	if(position_x==(round(position_x/16)*16)):
@@ -120,7 +160,9 @@ func set_location(enemy_number:int):
 		position_y-=8
 		
 	for i in range(0,initial_position_x.size()):
-		while (initial_position_x[i]==position_x or initial_position_y[i]==position_y):	
+		print("Utils enemy For is Running")
+		while (initial_position_x[i]==position_x or initial_position_y[i]==position_y):
+			print("Utils enemy while is Running")
 			position_x=randi_range(-264,184)
 			if(position_x>=-32):
 				position_y=randi_range(-136,120)
@@ -133,10 +175,15 @@ func set_location(enemy_number:int):
 			if(position_y==(round(position_y/16)*16)):
 				position_y-=8
 	
+	#if enemy_number==4:
+		#
+		#initial_position_x.append(position_x)
+		#initial_position_y.append(position_y)
 	
-		
 	enemy.position=Vector2(position_x,position_y)
 	print("enemy at:",enemy.position)
+	print(initial_position_x)	
+	print(initial_position_y)
 	var game = get_node("/root/game")
 	game.add_child(enemy)
-	print("Donw")
+	
