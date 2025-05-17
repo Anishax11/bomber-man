@@ -18,7 +18,9 @@ var restarted=false
 var skip_invincible=false
 var skip_fire=false	
 var skip_bomb=false	
-	
+var string_fire=""
+var string_invincible=""
+var string_bomb=""	
 func set_power_up(brick_position:Vector2) ->bool:
 		brickwall_count-=1
 		var blank_chance=randi_range(0,1)
@@ -47,48 +49,64 @@ func set_power_up(brick_position:Vector2) ->bool:
 
 			
 func get_active(current):
-	var string=""
+	
 	active.append(current)
 	var label1=get_node("/root/game/Label1")
+	
 	for i in range(0,active.size()):
-		if skip_invincible!=true and skip_fire!=true and skip_bomb!=true:	
-			label1.text+="Active PowerUps:\n"
-		if skip_fire!=true and active[i].index==0:
-			if skip_bomb==true or skip_invincible==true:
-				string=",Fire"
-			else:
-				string="Fire"
-			skip_fire=true
-			
-		elif skip_invincible!=true and active[i].index==1:
-			if skip_bomb==true or skip_fire==true:
-				string=",invincible"
-			else:
-				string="invincible"
-			skip_invincible=true
-			
-		elif skip_bomb!=true and active[i].index==2:
-			if skip_invincible==true or skip_fire==true:
-				string=",Bomb"
-			else:
-				string="Bomb"
-			skip_bomb=true
+		if active[i].index==0:
+			string_fire="Range Up"
+			if string_bomb!="" or string_invincible!="":
+				string_fire+=","
+		elif active[i].index==1:
+			string_invincible="Invincible"
+			if string_fire=="Range Up":
+				string_invincible=",Invincible"
+			if string_bomb!="":
+				string_invincible+=","
+		elif active[i].index==2:
+			string_bomb="Bomb Limit Up"
+			if string_invincible=="Invincible" or string_fire=="Range Up":
+				string_bomb=",Bomb Limit Up"
 		
-		label1.text+=string
+	if string_fire!="" or string_invincible!="" or string_bomb!="":
+		
+		label1.text="Active Powerups:\n"
+		label1.text+=string_fire+string_invincible+string_bomb
+		
+		
 	
 
 func remove_power_up(current):
+	#var found_fire
+	#var found_invincible
+	#var found_bomb
 	var label1=get_node("/root/game/Label1")
-	if current.index==0:
-		skip_fire=true
-		#label1.text="Active PowerUps:\n"
-		#if skip_bomb!=true and skip_invincible!=true:
-			#label1.text+="Bomb,Invincible"
-	if current.index==1:
-		skip_invincible=true
-	if current.index==2:
-		skip_bomb=true	
 	active.erase(current)
+	string_fire=""
+	string_invincible=""
+	string_bomb=""
+	
+	for i in range(0,active.size()):
+		if active[i].index==0:
+			string_fire="Range Up"
+			if active[i].index==2:
+				string_bomb="Range Up"
+		elif active[i].index==1:
+			string_invincible="Invincible"
+			if string_fire=="Range Up":
+				string_invincible=",Invincible"
+		elif active[i].index==2:
+			string_bomb="Bomb Limit Up"
+			if string_invincible=="Invincible" or string_fire=="Range Up":
+				string_bomb=",Bomb Limit Up"
+		
+	if string_fire!="" or string_invincible!="" or string_bomb!="":
+		
+		label1.text="Active Powerups:\n"
+		label1.text+=string_fire+string_invincible+string_bomb	
+	else:
+		label1.text=""	
 	current.queue_free()
 	print("active after erase:",active)
 
