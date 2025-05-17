@@ -15,12 +15,13 @@ var initial_position_x: Array[int]=[]
 var initial_position_y: Array[int]=[]
 const ENEMY = preload("res://scenes/enemy.tscn")
 var restarted=false
-var skip_invincible=false
-var skip_fire=false	
-var skip_bomb=false	
+	
 var string_fire=""
 var string_invincible=""
 var string_bomb=""	
+
+
+	
 func set_power_up(brick_position:Vector2) ->bool:
 		brickwall_count-=1
 		var blank_chance=randi_range(0,1)
@@ -78,9 +79,7 @@ func get_active(current):
 	
 
 func remove_power_up(current):
-	#var found_fire
-	#var found_invincible
-	#var found_bomb
+	
 	var label1=get_node("/root/game/Label1")
 	active.erase(current)
 	string_fire=""
@@ -154,6 +153,13 @@ func set_location(enemy_number:int):
 	if restarted==true:
 		initial_position_x.clear()
 		initial_position_y.clear()
+		active.clear()
+		exit_appeared=false
+		id=0
+		brickwall_count=83
+		string_fire=""
+		string_invincible=""
+		string_bomb=""
 		restarted=false
 	var enemy=ENEMY.instantiate()
 	enemy.name="Enemy"+str(enemy_number)

@@ -79,7 +79,7 @@ func _on_timer_timeout() -> void:
 		#print("entered previous if cond")
 		Utils.invincible=false
 	
-	if Utils.active.size()==1 and Utils.active[0].index==2:
+	if Utils.active.size()==1 and Utils.active[0].index==2 and bomb_placement!=null:
 		#print("entered previous if cond")
 		bomb_placement.bomb_limit=2
 		
@@ -96,7 +96,7 @@ func _on_timer_timeout() -> void:
 	
 	for j in range(Utils.active.size()):
 		
-		if Utils.active[j]!=null and Utils.active[j].index==2:
+		if Utils.active[j]!=null and Utils.active[j].index==2 and bomb_placement!=null:
 			bomb_placement.bomb_limit=4
 		elif j==Utils.active.size()-1:
 			bomb_placement.bomb_limit=2
