@@ -56,18 +56,18 @@ func get_active(current):
 	
 	for i in range(0,active.size()):
 		if active[i].index==0:
-			string_fire="Range Up"
+			string_fire="Explosion Range Up"
 			if string_bomb!="" or string_invincible!="":
 				string_fire+=","
 		elif active[i].index==1:
-			string_invincible="Invincible"
-			if string_fire=="Range Up":
-				string_invincible=",Invincible"
+			string_invincible="Invincibility"
+			if string_fire=="Explosion Range Up":
+				string_invincible=",Invincibility"
 			if string_bomb!="":
 				string_invincible+=","
 		elif active[i].index==2:
 			string_bomb="Bomb Limit Up"
-			if string_invincible=="Invincible" or string_fire=="Range Up":
+			if string_invincible=="Invincibility" or string_fire=="Explosion Range Up":
 				string_bomb=",Bomb Limit Up"
 		
 	if string_fire!="" or string_invincible!="" or string_bomb!="":
@@ -88,16 +88,16 @@ func remove_power_up(current):
 	
 	for i in range(0,active.size()):
 		if active[i].index==0:
-			string_fire="Range Up"
+			string_fire="Explosion Range Up"
 			if active[i].index==2:
 				string_bomb="Range Up"
 		elif active[i].index==1:
-			string_invincible="Invincible"
-			if string_fire=="Range Up":
-				string_invincible=",Invincible"
+			string_invincible="Invincibility"
+			if string_fire=="Explosion Range Up":
+				string_invincible=",Invincibility"
 		elif active[i].index==2:
 			string_bomb="Bomb Limit Up"
-			if string_invincible=="Invincible" or string_fire=="Range Up":
+			if string_invincible=="Invincibility" or string_fire=="Explosion Range Up":
 				string_bomb=",Bomb Limit Up"
 		
 	if string_fire!="" or string_invincible!="" or string_bomb!="":
@@ -110,7 +110,7 @@ func remove_power_up(current):
 	print("active after erase:",active)
 
 func exit(brick_position:Vector2,):
-	if exit_appeared==false:
+	if exit_appeared==false:#checks if exit has appeared in game before
 		print("Brickwalls:",brickwall_count)
 		var game = get_node_or_null("/root/game")
 		while game==null:
@@ -151,6 +151,9 @@ func create_labels(label_position:Vector2,label_text:String):
 
 func set_location(enemy_number:int):
 	if restarted==true:
+		print("Game restarted")
+		position_x=null
+		position_y=null
 		initial_position_x.clear()
 		initial_position_y.clear()
 		active.clear()
@@ -199,10 +202,10 @@ func set_location(enemy_number:int):
 			if(position_y==(round(position_y/16)*16)):
 				position_y-=8
 	
-	#if enemy_number==4:
-		#
-		#initial_position_x.append(position_x)
-		#initial_position_y.append(position_y)
+	if enemy_number==4:
+		
+		position_x=168
+		position_y=-72
 	
 	enemy.position=Vector2(position_x,position_y)
 	print("enemy at:",enemy.position)

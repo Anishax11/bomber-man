@@ -230,13 +230,13 @@ collide_with_areas = true
 
 [node name="topverticalright" type="RayCast2D" parent="Raycasts/Vertical/top"]
 position = Vector2(3, -6)
-target_position = Vector2(0, -1.5)
+target_position = Vector2(0, -1)
 collision_mask = 14
 collide_with_areas = true
 
 [node name="topverticalleft" type="RayCast2D" parent="Raycasts/Vertical/top"]
 position = Vector2(-3, -6)
-target_position = Vector2(0, -1.5)
+target_position = Vector2(0, -1)
 collision_mask = 14
 collide_with_areas = true
 
